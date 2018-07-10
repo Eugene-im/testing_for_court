@@ -12,6 +12,7 @@ var service = {};
 service.authenticate = authenticate;
 service.getById = getById;
 service.create = create;
+service.sendAnsvers = sendAnsvers;
 service.update = update;
 service.delete = _delete;
 
@@ -90,6 +91,58 @@ function create(userParam) {
 }
 
 function update(_id, userParam) {
+    var deferred = Q.defer();
+
+    // validation
+    db.users.findById(_id, function (err, user) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+
+        if (user.username !== userParam.username) {
+            // username has changed so check if the new username is already taken
+            db.users.findOne(
+                { username: userParam.username },
+                function (err, user) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+
+                    if (user) {
+                        // username already exists
+                        deferred.reject('Username "' + req.body.username + '" is already taken')
+                    } else {
+                        updateUser();
+                    }
+                });
+        } else {
+            updateUser();
+        }
+    });
+
+    function updateUser() {
+        // fields to update
+        var set = {
+            firstName: userParam.firstName,
+            lastName: userParam.lastName,
+            username: userParam.username,
+        };
+
+        // update password if it was entered
+        if (userParam.password) {
+            set.hash = bcrypt.hashSync(userParam.password, 10);
+        }
+
+        db.users.update(
+            { _id: mongo.helper.toObjectID(_id) },
+            { $set: set },
+            function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+
+                deferred.resolve();
+            });
+    }
+
+    return deferred.promise;
+}
+
+function sendAnsvers(_id, userParam) {
     var deferred = Q.defer();
 
     // validation

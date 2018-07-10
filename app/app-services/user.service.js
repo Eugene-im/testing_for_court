@@ -13,6 +13,7 @@
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
         service.Create = Create;
+        service.SendAnsvers = SendAnsvers;
         service.Update = Update;
         service.Delete = Delete;
 
@@ -36,6 +37,10 @@
 
         function Create(user) {
             return $http.post('/api/users', user).then(handleSuccess, handleError);
+        }
+
+        function SendAnsvers(user, ansvers) {
+            return $http.put('/api/users/send' + user._id, ansvers).then(handleSuccess, handleError);
         }
 
         function Update(user) {

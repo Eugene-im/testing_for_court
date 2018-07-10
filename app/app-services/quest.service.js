@@ -16,6 +16,9 @@
         function GetAll() {
             return $http.get('/api/quest/getall').then(handleSuccess, handleError);
         }
+        function SendAnsvers() {
+            return $http.post('/api/quest/send').then(handleSuccess, handleError);
+        }
 
         function GetByNum(num) {
             return $http.get('/api/quest/getbynum'+num).then(handleSuccess, handleError);
