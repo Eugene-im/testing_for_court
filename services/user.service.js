@@ -142,44 +142,21 @@ function update(_id, userParam) {
     return deferred.promise;
 }
 
-function sendAnsvers(_id, userParam) {
+function sendAnsvers(_id, ansvers, score) {
     var deferred = Q.defer();
 
     // validation
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
-
-        if (user.username !== userParam.username) {
-            // username has changed so check if the new username is already taken
-            db.users.findOne(
-                { username: userParam.username },
-                function (err, user) {
-                    if (err) deferred.reject(err.name + ': ' + err.message);
-
-                    if (user) {
-                        // username already exists
-                        deferred.reject('Username "' + req.body.username + '" is already taken')
-                    } else {
-                        updateUser();
-                    }
-                });
-        } else {
-            updateUser();
-        }
+        updateAnsvers();
     });
 
-    function updateUser() {
+    function updateAnsvers() {
         // fields to update
         var set = {
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            username: userParam.username,
+            test: ansvers,
+            score: score
         };
-
-        // update password if it was entered
-        if (userParam.password) {
-            set.hash = bcrypt.hashSync(userParam.password, 10);
-        }
 
         db.users.update(
             { _id: mongo.helper.toObjectID(_id) },
