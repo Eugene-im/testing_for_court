@@ -5,3 +5,24 @@
 .flash-message {
     margin-top: 20px;
 }
+
+.form-question{
+    padding: 15px;
+}
+
+.answer label, .answer input, .form-question span {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  margin-bottom: 20px; 
+  font-size: 18px;
+  line-height: 20px;
+}
+.answer label{
+    width: 90%;
+    font-weight: 400;
+}
+.answer input {
+    width: 9%;
+    height: 20px;
+}
