@@ -26,7 +26,7 @@
     width: 9%;
     height: 20px;
 }
-.form-question span{
+.form-question span.q{
     max-width: 90%;
     width: 100%;
 }
