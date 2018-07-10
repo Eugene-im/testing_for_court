@@ -44,7 +44,7 @@ for (let index in lines) {
       //nQust[num] = {
       nQust[objIndex++] = {
         block: block,
-        num: num,
+        num: +num,
         question: cnum[1],
         variant: []
       };

@@ -1,3 +1,45 @@
 ﻿<h1>Hi {{vm.user.firstName}}!!</h1>
 
-<div>{{vm.quest}}</div>
+<div>
+    <ul>
+        <!-- <li>{{vm.quest}}</li> -->
+    </ul>
+    <div class="form-question">
+        <span ng-model="vm.quest.num">1</span>
+        <span>.</span>
+        <span class="q" ng-model="vm.quest.question">qwerty?</span>
+        <div class="answer">
+            <label for="v0" ng-model="vm.quest.variant[0].text">text</label>
+            <input type="radio" name="question 1" id="v0" class="form-control" value "-" ng-model="vm.quest.variant[0].value" required
+            />
+            <label for="v1" ng-model="vm.quest.variant[1].text">text</label>
+            <input type="radio" name="question 1" id="v1" class="form-control" value "-" ng-model="vm.quest.variant[1].value" required
+            />
+            <label for="v2" ng-model="vm.quest.variant[2].text">text</label>
+            <input type="radio" name="question 1" id="v2" class="form-control" value "+" ng-model="vm.quest.variant[2].value" required
+            />
+            <label for="v3" ng-model="vm.quest.variant[3].text">text</label>
+            <input type="radio" name="question 1" id="v3" class="form-control" value "-" ng-model="vm.quest.variant[3].value" required
+            />
+        </div>
+    </div>
+    <div class="form-question">
+        <span ng-model="vm.quest.num">2</span>
+        <span>.</span>
+        <span class="q" ng-model="vm.quest.question">qwerty?</span>
+        <div class="answer">
+            <label for="v0" ng-model="vm.quest.variant[0].text">text</label>
+            <input type="radio" name="question 2" id="v0" class="form-control" value "-" ng-model="vm.quest.variant[0].value" required
+            />
+            <label for="v1" ng-model="vm.quest.variant[1].text">text</label>
+            <input type="radio" name="question 2" id="v1" class="form-control" value "+" ng-model="vm.quest.variant[1].value" required
+            />
+            <label for="v2" ng-model="vm.quest.variant[2].text">text</label>
+            <input type="radio" name="question 2" id="v2" class="form-control" value "-" ng-model="vm.quest.variant[2].value" required
+            />
+            <label for="v3" ng-model="vm.quest.variant[3].text">text</label>
+            <input type="radio" name="question 2" id="v3" class="form-control" value "-" ng-model="vm.quest.variant[3].value" required
+            />
+        </div>
+    </div>
+</div>

@@ -23,8 +23,10 @@ function getByNum(num) {
 }
 
 function getAll() {
-    var deferred = Q.defer();
-    db.Quest.find({});
-    console.log(db.Quest.find({}));
-    return deferred.promise;
+    mongoClient.connect(config.database, function(err, client){
+        client.db("test").collection("Quest").find({}).toArray(function(err, quest){
+            res.send(quest)
+            client.close();
+        });
+    });
 }

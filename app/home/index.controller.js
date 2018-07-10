@@ -19,7 +19,7 @@
                 vm.user = user;
             });
             QuestService.GetAll().then(function (quest) {
-                vm.quest = quest;})
+                vm.quest = quest})
         }
     }
 
