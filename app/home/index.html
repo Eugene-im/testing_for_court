@@ -1,9 +1,10 @@
-﻿<h1>Hi {{vm.user.firstName}}!!</h1>
+﻿<!-- <h1>Hi {{vm.user.firstName}}!!</h1> -->
 
 <form method="post">
     <span class="clock"></span>
     <div class="form-question" ng-repeat="quest in vm.quest">
-        <span>{{quest.num}}</span>
+        <span class="num"></span>
+        <!-- <span class="num">{{quest.num}}</span> -->
         <span>.</span>
         <span class="q">{{quest.question}}</span>
         <div class="answer">
@@ -23,14 +24,8 @@
         </div>
     </div>
     <div class="form-group">
-        <!-- <button class="btn btn-primary" ng-click="vm.saveAnsvers()">Save</button> -->
-        <button class="btn btn-danger" ng-click="vm.sendAnsvers()">Send</button>
+        <button class="btn btn-danger" ng-click="vm.sendAnsvers()">Завершити та відправити тестування</button>
     </div>
-    <!-- <div class="form-question">
-
-        <span ng-if="1">Loading </span>
-
-    </div> -->
 </form>
 
     <script>
@@ -41,4 +36,12 @@
             console.log(new Date(time * 1000).getMinutes(), ':', new Date(time * 1000).getSeconds())
             document.getElementsByClassName('clock')[0].innerHTML = new Date(time * 1000).getMinutes() + ':' + new Date(time * 1000).getSeconds();
         }, 1000)
+        // document.onload("numeration");
+        // document.addEventListener("DOMContentLoaded", numeration);
+       window.onload = function numeration(){
+        let nums = document.getElementsByClassName('num');
+        for (var i = 0; i < nums.length; i++){
+            nums[i].innerHTML = i+1;
+        }
+    }
     </script>
