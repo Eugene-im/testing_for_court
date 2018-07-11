@@ -12,7 +12,7 @@ module.exports = router;
 
 function getAll(req, res) {
     mongoClient.connect(config.connectionString, function(err, client){
-        client.db("test").collection("Quest").find({ block: 1, num: {$gt :120} }).toArray(function(err, quest){
+        client.db("test").collection("Quest").find({ block: 1, num: {$gt :190} }).toArray(function(err, quest){
             res.send(quest)
             client.close();
         });

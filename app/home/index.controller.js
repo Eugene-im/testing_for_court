@@ -10,6 +10,8 @@
 
         vm.user = null;
         vm.quest=null;
+        vm.ansvers=null;
+        vm.score=null;
 
         initController();
 
@@ -22,24 +24,17 @@
                 vm.quest = quest})
         }
         function saveUnsvers() {
-            // UserService.Update(vm.user)
-            //     .then(function () {
-            //         FlashService.Success('User updated');
-            //     })
-            //     .catch(function (error) {
-            //         FlashService.Error(error);
-            //     });
+            FlashService.Success('User score saved');
         }
 
-        function sendAnsvers(user, ansvers) {
-            // UserService.Delete(vm.user._id)
-            //     .then(function () {
-            //         // log user out
-            //         $window.location = '/login';
-            //     })
-            //     .catch(function (error) {
-            //         FlashService.Error(error);
-            //     });
+        function sendAnsvers(user, ansvers, score) {
+            UserService.sendAnsvers(vm.user, vm.ansvers, vm.score)
+            .then(function () {
+                FlashService.Success('User score updated');
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });
         }
     }
 
