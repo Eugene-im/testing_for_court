@@ -11,7 +11,8 @@
     <!-- header -->
     <header>
         <ul class="nav nav-tabs">
-            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Тест</a></li>
+            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Домашня сторінка</a></li>
+            <li ng-class="{active: activeTab === 'test'}"><a ui-sref="test">Тест</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Акаунт</a></li>
             <li><a href="/login" target="_self">Вийти</a></li>
         </ul>
@@ -38,5 +39,6 @@
     <script src="app-services/flash.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
+    <script src="test/index.controller.js"></script>
 </body>
 </html>

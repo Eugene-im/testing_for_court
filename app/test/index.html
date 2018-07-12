@@ -1,0 +1,27 @@
+<form method="post">
+    <span class="clock"></span>
+    <div class="form-question" ng-repeat="quest in vm.quest">
+        <span class="num"></span>
+        <!-- <span class="num">{{quest.num}}</span> -->
+        <span>.</span>
+        <span class="q">{{quest.question}}</span>
+        <div class="answer">
+
+            <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v0_{{quest.block}}.{{quest.num}}" value="{{quest.variant[0].value?'+':'-'}}"
+                required />
+            <label for="v0_{{quest.block}}.{{quest.num}}">{{quest.variant[0].text}}</label>
+            <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v1_{{quest.block}}.{{quest.num}}" value="{{quest.variant[1].value?'+':'-'}}"
+                required />
+            <label for="v1_{{quest.block}}.{{quest.num}}">{{quest.variant[1].text}}</label>
+            <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v2_{{quest.block}}.{{quest.num}}" value="{{quest.variant[2].value?'+':'-'}}"
+                required />
+            <label for="v2_{{quest.block}}.{{quest.num}}">{{quest.variant[2].text}}</label>
+            <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v3_{{quest.block}}.{{quest.num}}" value="{{quest.variant[3].value?'+':'-'}}"
+                required />
+            <label for="v3_{{quest.block}}.{{quest.num}}">{{quest.variant[3].text}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-danger" ng-click="vm.sendAnsvers()">Завершити та відправити тестування</button>
+    </div>
+</form>
