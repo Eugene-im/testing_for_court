@@ -58,13 +58,18 @@
 
         function getAnsvers() {
             let ansvers = {};
+            let score = 0;
             let array = document.getElementsByTagName('input');
             for (let i = 0, j = 0; i < array.length; i++) {
+                if (array[i].checked && array[i].value == "+") {
+                    score++;
+                }
                 if (array[i].checked) {
                     j = j + 1;
                     ansvers[j] = {
                         val: array[i].value,
-                        num: array[i].name
+                        num: array[i].name,
+                        score: score
                     };
                 }
             }
