@@ -28,7 +28,7 @@
         }
 
         function sendAnsvers(user, ansvers, score) {
-            let vm.ansvers = getAnsvers();
+            let vm = {ansvers: getAnsvers()}
             UserService.sendAnsvers(vm.user, vm.ansvers, vm.score)
             .then(function () {
                 FlashService.Success('User score updated');
