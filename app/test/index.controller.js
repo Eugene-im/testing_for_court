@@ -5,7 +5,7 @@
         .module('app')
         .controller('Test.IndexController', Controller);
 
-    function Controller(UserService, QuestService) {
+    function Controller(UserService, QuestService, FlashService) {
         var vm = this;
 
         vm.user = null;
