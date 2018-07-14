@@ -9,10 +9,10 @@
         var vm = this;
 
         vm.user = null;
-        vm.quest=null;
-        vm.ansvers=null;
-        vm.sendAnsvers=sendAnsvers;
-        vm.score=null;
+        vm.quest = null;
+        vm.ansvers = null;
+        vm.sendAnsvers = sendAnsvers;
+        vm.score = null;
 
         initController();
 
