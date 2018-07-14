@@ -5,7 +5,7 @@
         .module('app')
         .controller('Test.IndexController', Controller);
 
-    function Controller(UserService, QuestService, FlashService) {
+    function Controller($window, UserService, QuestService, FlashService) {
         var vm = this;
 
         vm.user = null;
@@ -23,19 +23,19 @@
             QuestService.GetAll().then(function (quest) {
                 vm.quest = quest})
         }
-        function saveUnsvers() {
+        function saveAnsvers() {
             FlashService.Success('User score saved');
         }
 
-        function sendAnsvers(user, ansvers, score) {
+        function sendAnsvers() {
             let vm = {ansvers: getAnsvers()}
-            UserService.sendAnsvers(vm.user, vm.ansvers, vm.score)
-            .then(function () {
-                FlashService.Success('User score updated');
-            })
-            .catch(function (error) {
-                FlashService.Error(error);
-            });
+            // UserService.sendAnsvers(vm.user, vm.ansvers, vm.score)
+            // .then(function () {
+            //     FlashService.Success('User score updated');
+            // })
+            // .catch(function (error) {
+            //     FlashService.Error(error);
+            // });
             console.log(vm.ansvers);
         }
 

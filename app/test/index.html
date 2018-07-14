@@ -1,12 +1,10 @@
 <form method="post">
     <span class="clock"></span>
-    <div class="form-question" ng-repeat="quest in vm.quest">
-        <span class="num"></span>
-        <!-- <span class="num">{{quest.num}}</span> -->
+    <div class="form-question" ng-repeat="(index,quest) in vm.quest">
+        <span class="num">{{index+1}}</span>
         <span>.</span>
         <span class="q">{{quest.question}}</span>
         <div class="answer">
-
             <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v0_{{quest.block}}.{{quest.num}}" value="{{quest.variant[0].value?'+':'-'}}"
                 required />
             <label for="v0_{{quest.block}}.{{quest.num}}">{{quest.variant[0].text}}</label>
@@ -22,15 +20,6 @@
         </div>
     </div>
     <div class="form-group">
-        <button class="btn btn-danger" ng-click="vm.saveUnsvers()">Завершити та відправити тестування</button>
+        <button class="btn btn-danger" ng-click="vm.sendAnsvers()">Завершити та відправити тестування</button>
     </div>
 </form>
-
-<script>
-    window.onload = function numeration() {
-        let nums = document.getElementsByClassName('num');
-        for (var i = 0; i < nums.length; i++) {
-            nums[i].innerHTML = i + 1;
-        }
-    }
-</script>
