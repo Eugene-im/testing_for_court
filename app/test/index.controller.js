@@ -5,12 +5,13 @@
         .module('app')
         .controller('Test.IndexController', Controller);
 
-    function Controller($window, UserService, QuestService, FlashService) {
+    function Controller(UserService, QuestService, FlashService) {
         var vm = this;
 
         vm.user = null;
         vm.quest=null;
         vm.ansvers=null;
+        vm.sendAnsvers=sendAnsvers;
         vm.score=null;
 
         initController();
@@ -28,14 +29,14 @@
         }
 
         function sendAnsvers() {
-            let vm = {ansvers: getAnsvers()}
-            // UserService.sendAnsvers(vm.user, vm.ansvers, vm.score)
-            // .then(function () {
-            //     FlashService.Success('User score updated');
-            // })
-            // .catch(function (error) {
-            //     FlashService.Error(error);
-            // });
+            let vm = {ansvers: getAnsvers()};
+            UserService.SendAnsvers(vm.user, vm.ansvers, vm.score)
+            .then(function () {
+                FlashService.Success('User score updated');
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });
             console.log(vm.ansvers);
         }
 

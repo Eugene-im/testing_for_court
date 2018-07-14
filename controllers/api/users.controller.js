@@ -7,6 +7,7 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
+router.post('/test', sendAnsvers);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
@@ -68,14 +69,14 @@ function updateUser(req, res) {
         });
 }
 
-function SendAnsvers(req, res) {
+function sendAnsvers(req, res) {
     var userId = req.user.sub;
     // if (req.params._id !== userId) {
     //     // can only update own account
     //     return res.status(401).send('You can only update your own account');
     // }
 
-    userService.update(userId, req.body)
+    userService.sendAnsvers(userId, req.body)
         .then(function () {
             res.sendStatus(200);
         })

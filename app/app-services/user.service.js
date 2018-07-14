@@ -40,7 +40,7 @@
         }
 
         function SendAnsvers(user, ansvers) {
-            return $http.put('/api/users/send' + user._id, ansvers).then(handleSuccess, handleError);
+            return $http.post('/api/users/send' + user._id, ansvers).then(handleSuccess, handleError);
         }
 
         function Update(user) {
