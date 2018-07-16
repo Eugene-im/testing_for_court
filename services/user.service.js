@@ -155,7 +155,7 @@ function sendAnsvers(_id, ansvers, score) {
         // fields to update
         var set = {
             test: ansvers,
-            score: score
+            score: ansvers.total
         };
 
         db.users.update(

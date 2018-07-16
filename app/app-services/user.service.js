@@ -39,8 +39,8 @@
             return $http.post('/api/users', user).then(handleSuccess, handleError);
         }
 
-        function SendAnsvers(user, ansvers, score) {
-            return $http.post('/api/users/send' + user._id, ansvers, score).then(handleSuccess, handleError);
+        function SendAnsvers(user, ansvers) {
+            return $http.post('/api/users/send' + user._id, ansvers).then(handleSuccess, handleError);
         }
 
         function Update(user) {

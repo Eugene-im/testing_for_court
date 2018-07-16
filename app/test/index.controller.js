@@ -11,7 +11,7 @@
         vm.user = null;
         vm.quest = null;
         vm.ansvers = null;
-        vm.score = null;
+        // vm.score = null;
         vm.sendAnsvers = sendAnsvers;
         // vm.sendAnsvers = sendAnsvers;
 
@@ -31,13 +31,8 @@
 
         function sendAnsvers() {
             vm.ansvers = getAnsvers();
-            vm.score = getScore();
             console.log(vm.ansvers);
-            console.log(vm.score);
-            // getAnsvers().then(function(ansvers){
-            //     vm.ansvers=ansvers;
-            // })
-            UserService.SendAnsvers(vm.user,vm.ansvers,vm.score)
+            UserService.SendAnsvers(vm.user, vm.ansvers)
             .then(function () {
                 FlashService.Success('User score updated');
             })
@@ -45,14 +40,6 @@
                 FlashService.Error(error);
             });
         }
-
-        // window.onload = function numeration() {
-        //     let nums = document.getElementsByClassName('num');
-        //     for (var i = 0; i < nums.length; i++) {
-        //         nums[i].innerHTML = i + 1;
-        //     }
-        // }
-
             // let time = (40 * 60)
     // let tic = setInterval(() => {
     //     if (time > 0) time--
@@ -80,18 +67,8 @@
                     };
                 }
             }
+            ansvers.total=score;
             return ansvers;
-        }
-        function getScore() {
-            let ansvers = {};
-            let score = 0;
-            let array = document.getElementsByTagName('input');
-            for (let i = 0, j = 0; i < array.length; i++) {
-                if (array[i].checked && array[i].value == "+") {
-                    score++;
-                }
-            }
-            return score;
         }
         // function getTrueAnsvers() {
         //     let ansvers = {};
