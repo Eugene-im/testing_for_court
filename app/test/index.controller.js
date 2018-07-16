@@ -13,7 +13,7 @@
         vm.ansvers = null;
         // vm.score = null;
         vm.sendAnsvers = sendAnsvers;
-        // vm.sendAnsvers = sendAnsvers;
+        vm.sendTrueAnsvers = sendTrueAnsvers;
 
         initController();
 
@@ -25,16 +25,27 @@
             QuestService.GetAll().then(function (quest) {
                 vm.quest = quest})
         }
-        function saveAnsvers() {
-            FlashService.Success('User score saved');
-        }
+        // function saveAnsvers() {
+        //     FlashService.Success('User score saved');
+        // }
 
         function sendAnsvers() {
             vm.ansvers = getAnsvers();
             console.log(vm.ansvers);
             UserService.SendAnsvers(vm.user, vm.ansvers)
             .then(function () {
-                FlashService.Success('User score updated');
+                FlashService.Success('Результати тесту відправлені');
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });
+        }
+        function sendTrueAnsvers() {
+            vm.ansvers = getTrueAnsvers();
+            console.log(vm.ansvers);
+            UserService.SendAnsvers(vm.user, vm.ansvers)
+            .then(function () {
+                FlashService.Success('Результати тесту відправлені!');
             })
             .catch(function (error) {
                 FlashService.Error(error);
@@ -70,20 +81,23 @@
             ansvers.total=score;
             return ansvers;
         }
-        // function getTrueAnsvers() {
-        //     let ansvers = {};
-        //     let array = document.getElementsByTagName('input');
-        //     for (let i = 0, j = 0; i < array.length; i++) {
-        //         if (array[i].value == "+") {
-        //             j = j + 1; 
-        //             ansvers[j] = {
-        //                 val: array[i].value,
-        //                 num: array[i].name
-        //             };
-        //         }
-        //     }
-        //     return ansvers;
-        // }
+        function getTrueAnsvers() {
+            let ansvers = {};
+            let score = 0;
+            let array = document.getElementsByTagName('input');
+            for (let i = 0, j = 0; i < array.length; i++) {
+                if (array[i].value == "+") {
+                    j = j + 1; 
+                    ansvers[j] = {
+                        val: array[i].value,
+                        num: array[i].name
+                    };
+                    score++;
+                }
+            }
+            ansvers.total=score;
+            return ansvers;
+        }
     }
 
 })();
