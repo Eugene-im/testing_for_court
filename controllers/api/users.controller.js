@@ -7,7 +7,7 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
-router.post('/test', sendAnsvers);
+router.post('/:_id', sendAnsvers);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 

@@ -11,8 +11,9 @@
         vm.user = null;
         vm.quest = null;
         vm.ansvers = null;
-        vm.sendAnsvers = sendAnsvers;
         vm.score = null;
+        vm.sendAnsvers = sendAnsvers;
+        // vm.sendAnsvers = sendAnsvers;
 
         initController();
 
@@ -29,15 +30,20 @@
         }
 
         function sendAnsvers() {
-            let vm = {ansvers: getAnsvers()};
-            UserService.SendAnsvers(vm.user, vm.ansvers, vm.score)
+            vm.ansvers = getAnsvers();
+            vm.score = getScore();
+            console.log(vm.ansvers);
+            console.log(vm.score);
+            // getAnsvers().then(function(ansvers){
+            //     vm.ansvers=ansvers;
+            // })
+            UserService.SendAnsvers(vm.user,vm.ansvers,vm.score)
             .then(function () {
                 FlashService.Success('User score updated');
             })
             .catch(function (error) {
                 FlashService.Error(error);
             });
-            console.log(vm.ansvers);
         }
 
         // window.onload = function numeration() {
@@ -75,6 +81,17 @@
                 }
             }
             return ansvers;
+        }
+        function getScore() {
+            let ansvers = {};
+            let score = 0;
+            let array = document.getElementsByTagName('input');
+            for (let i = 0, j = 0; i < array.length; i++) {
+                if (array[i].checked && array[i].value == "+") {
+                    score++;
+                }
+            }
+            return score;
         }
         // function getTrueAnsvers() {
         //     let ansvers = {};
