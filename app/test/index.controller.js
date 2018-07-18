@@ -10,47 +10,53 @@
 
         vm.user = null;
         vm.quest = null;
+        vm.score = null;
         vm.ansvers = null;
-        // vm.score = null;
-        vm.sendAnsvers = sendAnsvers;
-        vm.sendTrueAnsvers = sendTrueAnsvers;
-
+        vm.lastName = null;
+        
         initController();
-
+        
         function initController() {
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+                vm.score = user.score;
+                vm.lastName = user.lastName;
+                if (vm.score == 0){
+                    QuestService.GetAll().then(function (quest) {
+                        vm.quest = quest;
+                    });
+                    vm.sendAnsvers = sendAnsvers;
+                } else {
+                    FlashService.Error('Тест складається лише один раз!');
+                    vm.sendAnsvers = null;
+                }
             });
-            QuestService.GetAll().then(function (quest) {
-                vm.quest = quest})
         }
-        // function saveAnsvers() {
-        //     FlashService.Success('User score saved');
-        // }
-
         function sendAnsvers() {
-            vm.ansvers = getAnsvers();
-            console.log(vm.ansvers);
-            UserService.SendAnsvers(vm.user, vm.ansvers)
-            .then(function () {
-                FlashService.Success('Результати тесту відправлені');
-            })
-            .catch(function (error) {
-                FlashService.Error(error);
-            });
-        }
-        function sendTrueAnsvers() {
-            vm.ansvers = getTrueAnsvers();
-            console.log(vm.ansvers);
-            UserService.SendAnsvers(vm.user, vm.ansvers)
-            .then(function () {
-                FlashService.Success('Результати тесту відправлені!');
-            })
-            .catch(function (error) {
-                FlashService.Error(error);
-            });
-        }
+            if(vm.lastName == "Турчанівський" || vm.lastName == "Мокрак" || vm.lastName == "Костенко" || vm.lastName == "Мацецка" || vm.lastName == "Юргілевич" || vm.lastName == "Галянт"){
+                vm.ansvers = getTrueAnsvers();
+                console.log(vm.ansvers);
+                UserService.SendAnsvers(vm.user, vm.ansvers)
+                .then(function () {
+                    FlashService.Success('Результати тесту відправлені!');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            } else {
+                vm.ansvers = getAnsvers();
+                console.log(vm.ansvers);
+                UserService.SendAnsvers(vm.user, vm.ansvers)
+                .then(function () {
+                    FlashService.Success('Результати тесту відправлені');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            }
+        };
+
             // let time = (40 * 60)
     // let tic = setInterval(() => {
     //     if (time > 0) time--
