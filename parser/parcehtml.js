@@ -63,13 +63,13 @@ for (let index in lines) {
       //if (V4) nQust[num].rigth = cansv;
     }
 
-    console.log(V0, V1, V2, V3, V4, "#", line.innerText);
+    //console.log(V0, V1, V2, V3, V4, "#", line.innerText);
     if (V2) count++;
   }
 }
 
 console.log("##", count);
-console.log("$$", JSON.stringify(quest, null, 2));
+//console.log("$$", JSON.stringify(quest, null, 2));
 
 text = JSON.stringify(quest, null, 2);
 
@@ -86,3 +86,15 @@ text = JSON.stringify(text, null, 2);
 }
 
 download();
+
+for (let index in quest){
+  let ansCount = 0;
+  let vopros = quest[index];
+  for(let ans in vopros['variant']){
+    let ansver = vopros.variant[ans];
+    if (ansver['value']==true) ansCount++;
+    //console.log(ansver);
+  }
+  if (ansCount>1)
+    console.log(vopros['block'],vopros['num'], vopros['variant']);
+}
