@@ -3,6 +3,35 @@ var express = require('express');
 var router = express.Router();
 var questService = require('services/quest.service');
 const mongoClient = require("mongodb").MongoClient;
+const mongoose = require('mongoose');
+mongoose.connect(config.connectionString);
+const QuestSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    block : Number,
+    num : Number,
+    question : String,
+    variant : [ 
+        {
+            text : String,
+            value : Boolean
+        }, 
+        {
+            text : String,
+            value : Boolean
+        }, 
+        {
+            text : String,
+            value : Boolean
+        }, 
+        {
+            text : String,
+            value : Boolean
+        }
+    ]
+});
+var Quest = mongoose.model('Quest', QuestSchema);
+const db = mongoose.connection;
+
 // routes
 
 router.get('/getall', getAll);
@@ -11,12 +40,9 @@ router.get('/getbynum', getByNum);
 module.exports = router;
 
 function getAll(req, res) {
-    mongoClient.connect(config.connectionString, function(err, client){
-        client.db("test").collection("Quest").find({ block: 1, num: {$gt :100} }).limit(4).toArray(function(err, quest){
-            res.send(quest)
-            client.close();
-        });
-    });
+            Quest.aggregate().sample(40).exec((err, Quest) => res.send(Quest));
+            // Quest.aggregate().sample(40).exec((err, Quest) => 
+            // res.send(Quest.aggregate().sample(40));
 }
 
 function getByNum(req, res) {
