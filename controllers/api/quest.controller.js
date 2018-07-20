@@ -40,7 +40,7 @@ router.get('/getbynum', getByNum);
 module.exports = router;
 
 function getAll(req, res) {
-            Quest.aggregate().sample(40).exec((err, Quest) => res.send(Quest));
+            Quest.aggregate().sample(40).then((err, Quest) => res.send(Quest));
             // Quest.aggregate().sample(40).exec((err, Quest) => 
             // res.send(Quest.aggregate().sample(40));
 }
