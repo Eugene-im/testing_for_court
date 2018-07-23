@@ -26,7 +26,7 @@ async function getAll(req, res) {
             questCont[block]=[];
             for (let i=0; i<r; i++){
                let seed = Math.floor(Math.random() * num);
-               if (num<r) while (questCont[block].indexOf(seed)!=-1) {
+               if (num>r) while (questCont[block].indexOf(seed)!=-1) {
                     seed = Math.floor(Math.random() * num);
                }
                questCont[block].push(seed);
@@ -37,7 +37,7 @@ async function getAll(req, res) {
                 quest.push(doc);
             }
         }
-        //console.log(questCont)
+        //console.log(questCont,quest.length)
         db.close();
     } catch (error) {
         console.error(error);
