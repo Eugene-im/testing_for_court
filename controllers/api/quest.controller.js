@@ -23,21 +23,24 @@ async function getAll(req, res) {
             questCont.numInBlock[block] = await db.collection("Quest").find({ block: questCont.blockCount[block]}).count();  
             // get random massive quevery
             let num = questCont.numInBlock[block];
-            questCont[block]=[];
-            for (let i=0; i<r; i++){
-               let seed = Math.floor(Math.random() * num);
-               if (num>r) while (questCont[block].indexOf(seed)!=-1) {
-                    seed = Math.floor(Math.random() * num);
-               }
-               questCont[block].push(seed);
-            };
+            do {
+                questCont[block]=[];
+                for (let i=0; i<r; i++){
+                   let seed = Math.floor(Math.random() * num);
+                   if (num>r) while (questCont[block].indexOf(seed)!=-1 ||seed == 0) {
+                        seed = Math.floor(Math.random() * num);
+                   }
+                   questCont[block].push(seed);
+                };
+            } while (await db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}}).count()<r);
+
             // get quest
             let cursor = db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}})
             for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
                 quest.push(doc);
             }
         }
-        //console.log(questCont,quest.length)
+        console.log(questCont,quest.length)
         db.close();
     } catch (error) {
         console.error(error);
