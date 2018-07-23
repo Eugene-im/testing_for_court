@@ -1,5 +1,6 @@
 ﻿{
     "connectionString": "mongodb://localhost:27017/test",
     "apiUrl": "http://localhost:3000/api",
-    "secret": "74185694fdf:asdqwbjgjdghknfyhDFHGGHj"
+    "secret": "74185694fdf:asdqwbjgjdghknfyhDFHGGHj",
+    "questCount":40
 }
