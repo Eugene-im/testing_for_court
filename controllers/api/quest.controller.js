@@ -12,6 +12,7 @@ module.exports = router;
 
 async function getAll(req, res) {
     let quest = [];
+    let proba = 0;
     try {
         const db = await mongoClient.connect(config.connectionString);
         let questCont = {blockCount:[],numInBlock:[]};
@@ -27,12 +28,14 @@ async function getAll(req, res) {
                 questCont[block]=[];
                 for (let i=0; i<r; i++){
                    let seed = Math.floor(Math.random() * num);
-                   if (num>r) while (questCont[block].indexOf(seed)!=-1 ||seed == 0) {
+                   if (num>r) while (questCont[block].indexOf(seed)!=-1 ||seed == 0 || proba>100) {
                         seed = Math.floor(Math.random() * num);
+                        proba++;
                    }
                    questCont[block].push(seed);
                 };
-            } while (await db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}}).count()<r);
+                proba++;
+            } while (await db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}}).count()<r || proba>100);
 
             // get quest
             let cursor = db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}})
@@ -40,7 +43,7 @@ async function getAll(req, res) {
                 quest.push(doc);
             }
         }
-        console.log(questCont,quest.length)
+        //console.log(questCont,quest.length,proba)
         db.close();
     } catch (error) {
         console.error(error);
