@@ -25,6 +25,17 @@
                 if (vm.score == 0){
                     QuestService.GetAll().then(function (quest) {
                         vm.quest = quest;
+                        var AnsverTime = 20;
+                        function updateTime() {
+                            AnsverTime--;
+                            if (AnsverTime <= 0) {
+                                alert('timeout');
+                                vm.sendAnsvers()
+                                clearInterval(timm);
+                            }
+                        };
+                        var timm = setInterval(updateTime, 1000);
+
                     });
                     vm.sendAnsvers = sendAnsvers;
                 } else {
