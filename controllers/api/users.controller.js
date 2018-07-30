@@ -21,7 +21,7 @@ function authenticateUser(req, res) {
                 res.send({ token: token });
             } else {
                 // authentication failed
-                res.status(401).send('Username or password is incorrect');
+                res.status(401).send('Логін чи пароль не співпадають');
             }
         })
         .catch(function (err) {
@@ -57,7 +57,7 @@ function updateUser(req, res) {
     var userId = req.user.sub;
     if (req.params._id !== userId) {
         // can only update own account
-        return res.status(401).send('You can only update your own account');
+        return res.status(401).send('Ви можете оновити лише власний обліковий запис');
     }
 
     userService.update(userId, req.body)
@@ -89,7 +89,7 @@ function deleteUser(req, res) {
     var userId = req.user.sub;
     if (req.params._id !== userId) {
         // can only delete own account
-        return res.status(401).send('You can only delete your own account');
+        return res.status(401).send('Ви можете видалити лише власний обліковий запис');
     }
 
     userService.delete(userId)
