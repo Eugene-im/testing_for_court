@@ -30,8 +30,9 @@
                             AnsverTime--;
                             if (AnsverTime <= 0) {
                                 FlashService.Error('Час вийшов, усі відмічені варіанти відповідей відправлено.');
+                                delay(sendAnsvers(), 500);
                                 // alert('timeout');
-                                vm.sendAnsvers()
+                                // vm.sendAnsvers();
                                 clearInterval(timm);
                             }
                         };
