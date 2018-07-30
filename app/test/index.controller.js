@@ -28,9 +28,11 @@
                         var AnsverTime = 20;
                         function updateTime() {
                             AnsverTime--;
-                            if (AnsverTime <= 0) {
+                            if (AnsverTime == 10) {
                                 FlashService.Error('Час вийшов, усі відмічені варіанти відповідей відправлено.');
-                                // alert('timeout');
+                                alert('end')
+                            }
+                            if (AnsverTime <= 0) {
                                 vm.sendAnsvers()
                                 clearInterval(timm);
                             }
