@@ -12,6 +12,7 @@
     vm.ansvers = null;
     vm.lastName = null;
     vm.check = null;
+    vm.countdown = null;
 
     var AnsverTime = 2400000; //10^3ms=1s 2400000ms=40min
     var cDate = new Date();
@@ -42,7 +43,6 @@
         }
       });
     }
-
 
     function check() {
       var ctDate = new Date();
