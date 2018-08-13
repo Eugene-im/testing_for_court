@@ -42,10 +42,11 @@ for (let index in lines) {
       let nQust = quest;
       currentIndex = objIndex;
       //nQust[num] = {
+        cnum.shift();
       nQust[objIndex++] = {
         block: block,
         num: +num,
-        question: cnum[1],
+        question: cnum.join('.'),
         variant: []
       };
     }
