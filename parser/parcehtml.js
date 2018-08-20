@@ -1,100 +1,144 @@
-let lines = document.getElementsByTagName("p");
-let count = 0;
+/*
+ *
+ * <p> 
+ *  innerHTML </u> <b> <br> ↵
+ *  innerText  '0.' ,') '
+ * </p>
+ */
 
-let block = 1;
-let num = 0;
-let pnum = 1;
+'use strict;'
 
-let current = 0;
+const questions = {};
 
-let quest = {};
-let objIndex = 0;
-let currentIndex = objIndex;
+let outJson ={};
 
-for (let index in lines) {
-  let line = lines[index];
+let blockNum=1;
+let questionsCount = 0;
+let numCount=0;
+let currentNum=0;
 
-  let V0 =
-    line.innerText != undefined ? line.innerText.search(/\D+\.\s/) > 0 : false;
-  let V1 =
-    line.innerHTML != undefined ? line.innerHTML.search(/<b>/) > 0 : false;
-  let V2 =
-    line.innerText != undefined ? line.innerText.search(/\?/) > 0 : false;
-  let V3 =
-    line.innerText != undefined ? line.innerText.search(/\)\s/) > 0 : false;
-  let V4 =
-    line.innerHTML != undefined ? line.innerHTML.search(/<u>/) > 0 : false;
 
-  // if(V0)  {
-  //     console.log(V0,V1,V2,V3,'&',line.innerText);
-  // }
+if (typeof document!="undefined"){
+    let pBlocks = document.getElementsByTagName("p");
 
-  if (V2 || V3) {
-    if (V1 && V2) {
-      let cnum = line.innerText.split(".");
-      //if ((cnum.length = 1)) continue;
-      pnum = num;
-      if (!isNaN(cnum[0])) num = cnum[0];
-      if (Number(pnum) > Number(num)) block ++;
+    for (let index in pBlocks) {
+        let pBlock = pBlocks[index];
 
-      //if (qust[block] == undefined) qust[block] = {};
-      //let nQust = qust[block];
-      let nQust = quest;
-      currentIndex = objIndex;
-      //nQust[num] = {
-      nQust[objIndex++] = {
-        block: block,
-        num: +num,
-        question: cnum[1],
-        variant: []
-      };
+        let solid    =pBlock.innerHTML != undefined ?pBlock.innerHTML.search(/<b>/) != -1 : false;
+        let underLine=pBlock.innerHTML != undefined ?pBlock.innerHTML.search(/<u>/) != -1 : false;
+        
+        let numPoint =pBlock.innerText != undefined ?pBlock.innerText.search(/\d+.\s/) != -1 : false;  // '0._'
+        let ternar   =pBlock.innerText != undefined ?pBlock.innerText.search(/\?|\:/) != -1 : false;
+        let varSpace =pBlock.innerText != undefined ?pBlock.innerText.search(/^\S\)\s/) != -1 : false;    // 'w)_'
+
+        // if multi p split
+        let nextLine =pBlock.innerHTML != undefined ? pBlock.innerHTML.search(/<br>/) != -1 : false;
+        let enter    =pBlock.innerHTML != undefined ? pBlock.innerText.search(/↵?↵/) != -1 : false;
+
+        let line = pBlock.innerText;
+        //if(nextLine|enter) line = lines.split(/<br>|↵/);
+        let vopros = numPoint && solid && ternar;
+        let variant = varSpace;
+        if (variant && vopros) {
+            console.log('#'+blockNum+'.'+currentNum,
+            numPoint,'.  ',ternar,'?  ',varSpace,')  ',solid,'b  ',underLine,'_  ');
+            console.log('=>',line);
+            continue;
+        }
+        if(vopros) {
+            //add question
+            //console.log('&',line)
+            line = line.split('.');
+            let numQuestion = line.shift();
+            if(!isNaN(numQuestion)) {
+                numQuestion = Number(numQuestion);
+            }else {
+                numQuestion =  currentNum+1;
+            };
+            if(currentNum>numQuestion) {
+                console.log('Block',blockNum,':',currentNum,'>',numQuestion,':',(blockNum+1));
+                blockNum++;
+            }
+            currentNum = numQuestion;
+            let currentQuestion = line.join('.');
+            // add new object
+            questions[numCount++]={
+                block: blockNum,
+                num: numQuestion,
+                question:currentQuestion,
+                variant: []
+            };
+            questionsCount++;
+        } else if(variant ){
+            line = line.split(')');
+            questions[numCount-1].variant.push({
+                text: line[1],
+                value: underLine ? true : false
+              });
+        }
+
+    
+        outJson = JSON.stringify(questions, null, 2);
+        //console.log('$$',outJson)
     }
-
-    if (V3) {
-      let nQust = quest;
-
-      //if (nQust[num] == undefined) continue;
-      let cansv = line.innerText.split(")");
-      //if (nQust[currentIndex].variant != undefined)
-      nQust[currentIndex].variant.push({
-        text: cansv[1],
-        value: V4 ? true : false
-      });
-      //if (V4) nQust[num].rigth = cansv;
-    }
-
-    //console.log(V0, V1, V2, V3, V4, "#", line.innerText);
-    if (V2) count++;
-  }
-}
-
-console.log("##", count);
-//console.log("$$", JSON.stringify(quest, null, 2));
-
-text = JSON.stringify(quest, null, 2);
+    console.log("##", questionsCount);
 
 
+    function download(text=outJson, name='file.json', type='text/plain') {
+    
+        var a = document.getElementById("a");
+        var file = new Blob([text], {type: type});
+        a.href = URL.createObjectURL(file);
+        a.download = name;
+    };
+    
+    download();
+    console.log('Duplicate ------------------------------------------------------')
+    for (let index in questions){
+        let ansCount = 0;
+        let vopros = questions[index];
+        for(let ans in vopros['variant']){
+          let ansver = vopros.variant[ans];
+          if (ansver['value']==true) ansCount++;
+          //console.log(ansver);
+        }
+        if (ansCount>1)
+          console.log('B',vopros['block'],'#',vopros['num'], vopros['variant']);
+      }
 
-function download(text=quest, name='file.json', type='text/plain') {
+} else{
+//=====================================================================================================
 
-text = JSON.stringify(text, null, 2);
+    let text = `17. <br> Оберіть підстави ухвалення судом додаткового судового рішення: ... ?↵
+                а) судом не вирішено питання про судові витрати;↵
+                б) внесення виправлень у судове рішення;↵
+                в) роз’яснення судового рішення.↵↵`
+    console.log(text.match (/↵/g));
+    console.log(text.search(/↵/));
 
-  var a = document.getElementById("a");
-  var file = new Blob([text], {type: type});
-  a.href = URL.createObjectURL(file);
-  a.download = name;
-}
+    console.log(text.match (/↵+/));
+    console.log(text.search(/\↵+/g));
 
-download();
+    console.log(text.match (/↵?↵/));
+    console.log(text.search(/↵?↵/g));
 
-for (let index in quest){
-  let ansCount = 0;
-  let vopros = quest[index];
-  for(let ans in vopros['variant']){
-    let ansver = vopros.variant[ans];
-    if (ansver['value']==true) ansCount++;
-    //console.log(ansver);
-  }
-  if (ansCount>1)
-    console.log(vopros['block'],vopros['num'], vopros['variant']);
+    console.log(/↵/.test(text));
+    console.log('text'.search(/↵/g));
+    console.log(text.split(/<br>|↵/));
+
+    console.log('c) text'.search(/^\S\)\s/));
+    console.log(' c)text'.search(/^\S\)\s/));
+    console.log('А) за принципом'.search(/^\S\)\s/));
+    console.log(' судді (судді-доповідачу) передаються'.search(/^\S\)\s/));
+    console.log(' vc) text'.search(/^\S\)\s/));
+    console.log(' c) text f) '.search(/^\S\)\s/));
+
+    console.log('1. '.search(/\d.\s/));
+    console.log('38. Протягом яко'.search(/\d+.\s/));
+    console.log('fdf58. Протягом яко'.search(/^\d+.\s/));
+
+    console.log('fdf58. Протягом яко?'.search(/\?|\:/));
+    console.log('fdf58. Протягом яко:'.search(/\?|\:/));
+    console.log('fdf58. Протягом яко...'.search(/\?|\:/));
+    console.log('fdf58. Протягом яко... jhgh. hgh'.split('.').shift());
 }
