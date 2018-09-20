@@ -40,7 +40,7 @@ async function getAll(req, res) {
                    questCont[block].push(seed);
                 };
                 proba++;
-            } while (await db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}}).count()<numInBlock || proba>100);
+            } while (await db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}}).count()!= numInBlock || proba>100);
 
             // get quest
             let cursor = db.collection("Quest").find({block:questCont.blockCount[block], num :{$in : questCont[block]}})
