@@ -125,7 +125,7 @@
           score++;
         }
       }
-      ansvers.total = score;
+      ansvers.total = score-3;
       return ansvers;
     }
   }
