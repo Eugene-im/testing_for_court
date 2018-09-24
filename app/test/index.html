@@ -7,21 +7,21 @@
         var h = new Date(time * 1000).getHours();
         var m = new Date(time * 1000).getMinutes();
         var s = new Date(time * 1000).getSeconds();
-        h = (h < 10) ? "0" + h-2 : h-2;
+        h = (h < 10) ? "0" + h - 2 : h - 2;
         m = (m < 10) ? "0" + m : m;
         s = (s < 10) ? "0" + s : s;
         str = m + ":" + s;
         document.getElementsByClassName('clock')[0].innerHTML = str
     }, 1000)
 </script>
+<div class="clock">
+    <span id="hours"></span>
+    <span>:</span>
+    <span id="minutes"></span>
+    <span>:</span>
+    <span id="seconds"></span>
+</div>
 <form method="post">
-    <span class="clock">
-        <span id="hours"></span>
-        <span>:</span>
-        <span id="minutes"></span>
-        <span>:</span>
-        <span id="seconds"></span>
-    </span>
     <div class="form-question" ng-repeat="(index,quest) in vm.quest">
         <span class="num">{{index+1}}</span>
         <span>.</span>
