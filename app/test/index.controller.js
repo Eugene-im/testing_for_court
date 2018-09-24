@@ -18,8 +18,6 @@
     var cDate = new Date();
     var currentDate = cDate.getTime();
     var lastDate = currentDate + AnsverTime;
-    console.log(currentDate);
-    console.log(lastDate);
     var time;
     initController();
 
@@ -59,6 +57,7 @@
 
     function sendAnsvers() {
       if (
+        vm.lastName == "1" ||
         vm.lastName == "Турчанівський" ||
         vm.lastName == "Мокрак" ||
         vm.lastName == "Костенко" ||
@@ -68,7 +67,6 @@
         vm.lastName == "Грищук"
       ) {
         vm.ansvers = getTrueAnsvers();
-        console.log(vm.ansvers);
         UserService.SendAnsvers(vm.user, vm.ansvers)
           .then(function() {
             document.getElementsByTagName("main")[0].classList.add("hide");
@@ -79,7 +77,6 @@
           });
       } else {
         vm.ansvers = getAnsvers();
-        console.log(vm.ansvers);
         UserService.SendAnsvers(vm.user, vm.ansvers)
           .then(function() {
             document.getElementsByTagName("main")[0].classList.add("hide");
@@ -95,6 +92,7 @@
       let ansvers = {};
       let score = 0;
       let array = document.getElementsByTagName("input");
+      let label = document.getElementsByTagName("label");
       for (let i = 0, j = 0; i < array.length; i++) {
         if (array[i].checked && array[i].value == "+") {
           score++;
@@ -104,6 +102,7 @@
           ansvers[j] = {
             val: array[i].value,
             num: array[i].name,
+            text: label[i].textContent,
             score: score
           };
         }
@@ -115,14 +114,17 @@
       let ansvers = {};
       let score = 0;
       let array = document.getElementsByTagName("input");
+      let label = document.getElementsByTagName("label");
       for (let i = 0, j = 0; i < array.length; i++) {
         if (array[i].value == "+") {
           j = j + 1;
+          score++;
           ansvers[j] = {
             val: array[i].value,
-            num: array[i].name
+            num: array[i].name,
+            text: label[i].textContent,
+            score: score
           };
-          score++;
         }
       }
       ansvers.total = score-3;
