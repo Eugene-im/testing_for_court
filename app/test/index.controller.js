@@ -113,21 +113,39 @@
     function getTrueAnsvers() {
       let ansvers = {};
       let score = 0;
+      let maxscore = 50;
       let array = document.getElementsByTagName("input");
       let label = document.getElementsByTagName("label");
       for (let i = 0, j = 0; i < array.length; i++) {
-        if (array[i].value == "+") {
+        if (array[i].value == "+" ) {
           j = j + 1;
-          score++;
-          ansvers[j] = {
-            val: array[i].value,
-            num: array[i].name,
-            text: label[i].textContent,
-            score: score
-          };
+          if( j <= maxscore){
+            score++;
+            ansvers[j] = {
+              val: array[i].value,
+              num: array[i].name,
+              text: label[i].textContent,
+              score: score
+            };
+          } else  {
+            let shift = 0;
+            if (
+              array[i + 1] &&
+              array[i].name == array[i + 1].name &&
+              array[i - 1] &&
+              array[i].name != array[i - 1].name &&
+              array[i].value == "-"
+            ) {shift = 1}  else {shift= -1};
+            ansvers[j] = {
+              val: array[i+shift].value,
+              num: array[i+shift].name,
+              text: label[i+shift].textContent,
+              score: score
+            };
+          }
         }
       }
-      ansvers.total = score-3;
+      ansvers.total = score;
       return ansvers;
     }
   }
