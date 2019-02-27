@@ -18,7 +18,8 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true 
 app.use('/api', expressJwt({ secret: config.secret }).unless({ path: [
   '/api/users/authenticate', 
   '/api/users/register',
-  '/api/users/all'
+  '/api/users/all',
+  '/api/users/foto',
 ] }));
 
 // routes

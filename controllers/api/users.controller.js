@@ -7,11 +7,12 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
-router.post('/:_id', sendAnsvers);
+//router.post('/:_id', sendAnsvers);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
 router.get('/all', getUsers);
+router.post('/foto', postFoto);
 
 const mongoClient = require("mongodb").MongoClient;
 
@@ -29,6 +30,22 @@ async function getUsers(req, res) {
         console.error(error);
     }finally{
         res.send(users)
+    }   
+}
+
+async function postFoto(req, res) {
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("users").insert({raw:"0x21332214235"});
+        // for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+        //     users.push(doc);
+        // }
+        console.log('uu',cursor);
+        db.close();
+    } catch (error) {
+        console.error(error);
+    }finally{
+        res.send('ok')
     }   
 }
 
