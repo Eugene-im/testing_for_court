@@ -11,6 +11,27 @@ router.post('/:_id', sendAnsvers);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
+router.get('/all', getUsers);
+
+const mongoClient = require("mongodb").MongoClient;
+
+async function getUsers(req, res) {
+    let users = []
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("users").find();
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            users.push(doc);
+        }
+        console.log('uu',users);
+        db.close();
+    } catch (error) {
+        console.error(error);
+    }finally{
+        res.send(users)
+    }   
+}
+
 module.exports = router;
 
 function authenticateUser(req, res) {
