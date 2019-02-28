@@ -22,7 +22,7 @@ async function getUsers(req, res) {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("users").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            users.push(doc);
+            users.push(doc.username);
         }
         console.log('uu',users);
         db.close();
