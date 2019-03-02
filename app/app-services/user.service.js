@@ -13,7 +13,6 @@
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
         service.Create = Create;
-        service.SendAnsvers = SendAnsvers;
         service.Update = Update;
         service.addNew = addNew;
         service.Delete = Delete;
@@ -25,7 +24,7 @@
         }
 
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError);
+            return $http.get('/api/users/all').then(handleSuccess, handleError);
         }
 
         function GetById(_id) {
@@ -40,16 +39,12 @@
             return $http.post('/api/users', user).then(handleSuccess, handleError);
         }
 
-        function SendAnsvers(user, ansvers) {
-            return $http.post('/api/users/send' + user._id, ansvers).then(handleSuccess, handleError);
-        }
-
         function Update(user) {
             return $http.put('/api/users/' + user._id, user).then(handleSuccess, handleError);
         }
 
         function addNew(user) {
-            return $http.post('/api/users/asd', user).then(handleSuccess, handleError);
+            return $http.post('/api/users/add', user).then(handleSuccess, handleError);
         }
 
         function Delete(_id) {
