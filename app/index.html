@@ -2,19 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Тестування ВААС</title>
+    <title>Електронний журнал</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//bootswatch.com/3/cerulean/bootstrap.min.css">
     <link href="app-content/app.css" rel="stylesheet" />
 </head>
 <body class="container">
     <!-- header -->
     <header>
         <ul class="nav nav-tabs">
-            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Домашня сторінка</a></li>
-            <li ng-class="{active: activeTab === 'test'}"><a ui-sref="test">Тест</a></li>
+            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Реєстрація</a></li>
+            <li ng-class="{active: activeTab === 'test'}"><a ui-sref="test">Усі користувачі</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Акаунт</a></li>
-            <li><a href="/login" target="_self">Вийти</a></li>
+            <li class="btn-danger"><a href="/login" target="_self">Вийти</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>

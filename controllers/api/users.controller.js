@@ -7,7 +7,7 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
-//router.post('/:_id', sendAnsvers);
+router.post('/asd', viewUser);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
@@ -107,20 +107,21 @@ function updateUser(req, res) {
         });
 }
 
-function sendAnsvers(req, res) {
-    var userId = req.user.sub;
-    // if (req.params._id !== userId) {
-    //     // can only update own account
-    //     return res.status(401).send('You can only update your own account');
-    // }
+function viewUser(req, res) {
+    // var userId = req.user.sub;
+    // // if (req.params._id !== userId) {
+    // //     // can only update own account
+    // //     return res.status(401).send('You can only update your own account');
+    // // }
 
-    userService.sendAnsvers(userId, req.body)
-        .then(function () {
-            res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
+    // userService.sendAnsvers(userId, req.body)
+    //     .then(function () {
+    //         res.sendStatus(200);
+    //     })
+    //     .catch(function (err) {
+    //         res.status(400).send(err);
+    //     });
+    console.log(req.body,res.body);
 }
 
 function deleteUser(req, res) {

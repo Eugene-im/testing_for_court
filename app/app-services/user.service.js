@@ -15,6 +15,7 @@
         service.Create = Create;
         service.SendAnsvers = SendAnsvers;
         service.Update = Update;
+        service.addNew = addNew;
         service.Delete = Delete;
 
         return service;
@@ -45,6 +46,10 @@
 
         function Update(user) {
             return $http.put('/api/users/' + user._id, user).then(handleSuccess, handleError);
+        }
+
+        function addNew(user) {
+            return $http.post('/api/users/asd', user).then(handleSuccess, handleError);
         }
 
         function Delete(_id) {
