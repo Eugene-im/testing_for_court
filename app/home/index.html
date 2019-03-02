@@ -5,7 +5,7 @@
       type="text"
       id="lastName"
       class="form-control"
-      ng-model="vm.user.lastName"
+      ng-model="vm.newUser.lastName"
       required
     />
   </div>
@@ -15,7 +15,7 @@
       type="text"
       id="firstName"
       class="form-control"
-      ng-model="vm.user.firstName"
+      ng-model="vm.newUser.firstName"
       required
     />
   </div>
@@ -25,7 +25,7 @@
       type="text"
       id="lastName"
       class="form-control"
-      ng-model="vm.user.lastName"
+      ng-model="vm.newUser.surName"
       required
     />
   </div>
@@ -35,7 +35,7 @@
       type="text"
       id="username"
       class="form-control"
-      ng-model="vm.user.username"
+      ng-model="vm.newUser.destination"
       required
     />
   </div>
@@ -95,38 +95,4 @@
       reader.readAsDataURL(file);
     }
   }
-
-  $("#add1_new").submit(function(event) {
-    event.preventDefault();
-    var formData = $("#add_new").serialize();
-    var url_str = "/api/users/asd";
-
-    $.ajax({
-      type: "POST",
-      url: url_str,
-      data: formData
-    })
-      .done(function(response) {
-        $(".overflow").toggle();
-        console.log("ok" + response);
-        alert(
-          "Ваше сообщение отправлено, вскоре с Вами свяжется наш специалист."
-        );
-        $("#add_new input").val("");
-      })
-      .fail(function(data) {
-        if (data.responseText !== "") {
-          console.log("error" + " " + data);
-          alert("error:" + data);
-        } else {
-          console.log(
-            "При отправке сообщения произошла ошибка, попробуйте пожалуйста еще раз."
-          );
-          alert(
-            "При отправке сообщения произошла ошибка, попробуйте пожалуйста еще раз."
-          );
-        }
-        $(".overflow").toggle();
-      });
-  });
 </script>

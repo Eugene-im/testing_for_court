@@ -11,7 +11,8 @@
         vm.user = null;
         vm.newUser = null;
         vm.addNew = addNew;
-        vm.getNewUser = getNewUser;
+        // vm.getNewUser = getNewUser;
+        vm.previewFile = previewFile;
 
         initController();
 
@@ -22,22 +23,7 @@
             });
         }
 
-
-        function getNewUser() {
-            let newUser = {};
-            let score = 0;
-            let array = document.getElementsByTagName("input");
-            for (let i = 0, j = 0; i < array.length; i++) {
-                score++;              
-              }
-            
-            newUser.total = score;
-            return newUser;
-          }
-
         function addNew() {
-            vm.newUser = {"score":100};
-            // vm.newUser = getNewUser();
             console.log(vm.newUser);
             UserService.addNew(vm.newUser)
           .then(function() {
