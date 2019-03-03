@@ -88,7 +88,7 @@
     border-radius: 0 4px 4px 0;
 }
 
-#file1,#file2{position: absolute; left: -1000px;}
+#file_1,#file_2{position: absolute; left: -1000px;}
 
 label.u1,label.u2{
     font-size: 15px;
