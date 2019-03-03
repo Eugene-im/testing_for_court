@@ -47,7 +47,8 @@
       >Обрати файл</label
     >
     <input type="file" onchange="previewFile('_1')" id="file_1" />
-    <input 
+    <input
+      id="fileName_1"
       type="text"
       class="form-control"
       placeholder="Username"
@@ -63,6 +64,7 @@
     >
     <input type="file" onchange="previewFile('_2')" id="file_2" />
     <input
+      id="fileName_2"
       type="text"
       class="form-control"
       placeholder="Username"
@@ -71,7 +73,12 @@
   </div>
 
   <div class="form-group">
-    <button type="submit" id="submitButton" ng-click="vm.addNew()" class="btn btn-success">
+    <button
+      type="submit"
+      id="submitButton"
+      ng-click="vm.addNew()"
+      class="btn btn-success"
+    >
       Зареєструвати
     </button>
   </div>
@@ -80,14 +87,16 @@
 <script>
   function previewFile(img) {
     var preview = document.getElementById(img);
-    var file = document.getElementById('file'+img).files[0];
+    var fileName = document.getElementById("fileName"+img);
+    var file = document.getElementById("file" + img).files[0];
     var reader = new FileReader();
 
     reader.addEventListener(
       "load",
       function() {
         // preview.setAttribute('ng-src',reader.result);
-        preview.setAttribute('src',reader.result);
+        preview.setAttribute("src", reader.result);
+        fileName.value = file.name;
       },
       false
     );
