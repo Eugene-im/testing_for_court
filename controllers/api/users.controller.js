@@ -108,20 +108,16 @@ function updateUser(req, res) {
 }
 
 function viewUser(req, res) {
-    // var userId = req.user.sub;
-    // // if (req.params._id !== userId) {
-    // //     // can only update own account
-    // //     return res.status(401).send('You can only update your own account');
-    // // }
 
-    // userService.sendAnsvers(userId, req.body)
-    //     .then(function () {
-    //         res.sendStatus(200);
-    //     })
-    //     .catch(function (err) {
-    //         res.status(400).send(err);
-    //     });
-    console.log(req.body,res.body);
+    //console.log(req.body,res.body);
+    
+    userService.addData(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }
 
 function deleteUser(req, res) {
