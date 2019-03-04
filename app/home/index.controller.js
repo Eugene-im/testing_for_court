@@ -16,6 +16,10 @@
         vm.two = null;
         vm.qwe = null;
 
+        $scope.$watch('two', function(){
+            console.log('Two cahnged', arguments);
+        });
+
         initController();
 
         function initController() {
@@ -32,18 +36,22 @@
 
           reader.addEventListener("load", function() {
             vm[x] = reader.result;
+            $scope.$digest();
             // vm.qwe = reader.result;
-            console.log(vm[x]);
-            },
-            false
+            console.log(vm);
+            }
           );
 
           if (arguments[0].files[0]) {
             reader.readAsDataURL(arguments[0].files[0]);
           }
+
         }
 
         function addNew() {
+          vm.newUser.idfoto1 = vm.one;
+          vm.newUser.idfoto2 = vm.two;
+          vm.newUser.date = new Date();
             console.log(vm.newUser);
             UserService.addNew(vm.newUser).then(function() {
             FlashService.Success("відправлено");

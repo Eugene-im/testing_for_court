@@ -42,7 +42,7 @@
 
   <div class="form-group upload">
     <label class="u1" for="userIdFoto">Фото особи</label>
-    <img class="u1" id="one" ng-src='{{one}}' src="" alt="" srcset="" />
+    <img class="u1" id="one" ng-src='{{vm.one}}' alt="" srcset="" />
     <label for="fileone" class="btn btn-default input-group-addon"
       >Обрати файл</label
     >
@@ -59,11 +59,11 @@
 
   <div class="form-group upload">
     <label class="u2" for="userIdFoto">Фото документа що посвідчує особу</label>
-    <img class="u2" id="two" ng-src='{{two}}' src='' alt="" srcset="" />
+    <img class="u2" id="two" ng-src='{{vm.two}}' alt="" srcset="" />
     <label for="filetwo" class="btn btn-default input-group-addon"
       >Обрати файл</label
     >
-    <input type="file" imgfor="two" onchange="angular.element(this).scope().fileNameChanged(this)" id="filetwo" />
+    <input type="file" imgfor="two" namefore="" onchange="angular.element(this).scope().fileNameChanged(this)" id="filetwo" />
     <input
       id="fileName_two"
       type="text"
@@ -84,26 +84,3 @@
     </button>
   </div>
 </form>
-
-<!-- <script>
-  function previewFile(img) {
-    var preview = document.getElementById(img);
-    var fileName = document.getElementById("fileName"+img);
-    var file = document.getElementById("file" + img).files[0];
-    var reader = new FileReader();
-
-    reader.addEventListener(
-      "load",
-      function() {
-        // preview.setAttribute('ng-src',reader.result);
-        preview.setAttribute("src", reader.result);
-        fileName.value = file.name;
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
-</script> -->
