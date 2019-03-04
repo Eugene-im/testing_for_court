@@ -42,13 +42,14 @@
 
   <div class="form-group upload">
     <label class="u1" for="userIdFoto">Фото особи</label>
-    <img class="u1" id="_1" src="" alt="" srcset="" />
-    <label for="file_1" class="btn btn-default input-group-addon"
+    <img class="u1" id="one" ng-src='{{one}}' src="" alt="" srcset="" />
+    <label for="fileone" class="btn btn-default input-group-addon"
       >Обрати файл</label
     >
-    <input type="file" onchange="previewFile('_1')" id="file_1" />
+
+    <input type="file" imgfor="one" onchange="angular.element(this).scope().fileNameChanged(this)" id="fileone" />
     <input
-      id="fileName_1"
+      id="fileName_one"
       type="text"
       class="form-control"
       placeholder="Username"
@@ -58,13 +59,13 @@
 
   <div class="form-group upload">
     <label class="u2" for="userIdFoto">Фото документа що посвідчує особу</label>
-    <img class="u2" id="_2" ng-src="" alt="" srcset="" />
-    <label for="file_2" class="btn btn-default input-group-addon"
+    <img class="u2" id="two" ng-src='{{two}}' src='' alt="" srcset="" />
+    <label for="filetwo" class="btn btn-default input-group-addon"
       >Обрати файл</label
     >
-    <input type="file" onchange="previewFile('_2')" id="file_2" />
+    <input type="file" imgfor="two" onchange="angular.element(this).scope().fileNameChanged(this)" id="filetwo" />
     <input
-      id="fileName_2"
+      id="fileName_two"
       type="text"
       class="form-control"
       placeholder="Username"
@@ -84,7 +85,7 @@
   </div>
 </form>
 
-<script>
+<!-- <script>
   function previewFile(img) {
     var preview = document.getElementById(img);
     var fileName = document.getElementById("fileName"+img);
@@ -105,4 +106,4 @@
       reader.readAsDataURL(file);
     }
   }
-</script>
+</script> -->
