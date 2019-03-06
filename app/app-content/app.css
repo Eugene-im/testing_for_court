@@ -180,11 +180,18 @@ form {
   padding-right: 10px;
   height: 80vh;
   overflow: hidden scroll;
-  cursor: pointer;
 }
-.userList_item:hover {
+.userList_item:hover,
+.userList_item.nohover .user_foto:hover,
+.userList_item.nohover .user_info > *:hover {
   background: rgba(100, 100, 100, 0.4);
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.userList_item.nohover{
+  background: none;
+  border-radius: 0;
 }
 
 .userList_title {
