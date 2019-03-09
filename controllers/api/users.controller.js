@@ -7,7 +7,8 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
-router.post('/add', viewUser);
+router.post('/add', addClient);
+router.post('/get', getClients);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
@@ -107,18 +108,62 @@ function updateUser(req, res) {
         });
 }
 
-function viewUser(req, res) {
+function addClient(req, res) {
 
     //console.log(req.body,res.body);
-    
-    userService.addData(req.body)
-    .then(function () {
-        res.sendStatus(200);
-    })
-    .catch(function (err) {
+    let clientExist = false;
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("client").find();
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
+                clientExist = true;
+                break;
+            } 
+        }
+        await mdb.collection("client").insert(data);
+        db.close();
+    } catch (error) {
+        console.error(error);
         res.status(400).send(err);
-    });
+    } finally{
+        if (clientExist){
+            res.status(400).send(`Client exist`);
+        } else{
+            res.sendStatus(200);
+        }
+    }
+    // userService.addClientData(req.body)
+    // .then(function () {
+    //     res.sendStatus(200);
+    // })
+    // .catch(function (err) {
+    //     res.status(400).send(err);
+    // });
 }
+
+function getClients(req, res) {
+
+    //console.log(req.body,res.body);
+    let client= [];
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("client").find();
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
+                client.push(doc);
+            } 
+        }
+        db.close();
+    } catch (error) {
+        console.error(error);
+        res.status(400).send(err);
+    } finally{
+        res.send(client);
+    }
+}
+
+
 
 function deleteUser(req, res) {
     var userId = req.user.sub;
