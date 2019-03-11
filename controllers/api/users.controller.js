@@ -108,7 +108,7 @@ function updateUser(req, res) {
         });
 }
 
-function addClient(req, res) {
+async function addClient(req, res) {
 
     //console.log(req.body,res.body);
     let clientExist = false;
@@ -142,7 +142,7 @@ function addClient(req, res) {
     // });
 }
 
-function getClients(req, res) {
+async function getClients(req, res) {
 
     //console.log(req.body,res.body);
     let client= [];
