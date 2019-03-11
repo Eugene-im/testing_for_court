@@ -10,6 +10,8 @@
     vm.allUsers = null;
     vm.ansvers = null;
     vm.allClients = null;
+    vm.name = null;
+    vm.searchClients = searchClients;
 
     initController();
 
@@ -23,15 +25,26 @@
 
 
     function getAllClients(){
-      UserService.GetAll().then(function(users) {
-        vm.allUsers = users;
-        console.log(vm.allUsers)
+      //if arguments.length == 0 then 
+      UserService.GetAllClients().then(function(clients) {
+        vm.allClients = clients;
+        console.log(vm.allClients);
       });
+      //else 
+      // UserService.GetAllClients().then(function(clients) {
+      //   vm.allClients = clients;
+      //   console.log(vm.allClients);
+      // });
+
     }
 
-    function searchClients(name){
-      UserService.GetByUsername(name).then(function(clients){
+    function searchClients(){
+      var name = vm.name;
+      console.log(vm.name);
+      UserService.GetByClientname(name).then(function(clients){
         vm.allClients = clients;
+        console.log(vm.allClients);
+        // console.log(vm.name);        
       })
     }
 

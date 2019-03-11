@@ -9,9 +9,10 @@
         var service = {};
 
         service.GetCurrent = GetCurrent;
-        service.GetAll = GetAll;
+        service.GetAllClients = GetAllClients;
+        service.GetAllUsers = GetAllUsers;
         service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
+        service.GetByClientname = GetByClientname;
         service.Create = Create;
         service.Update = Update;
         service.addNew = addNew;
@@ -23,15 +24,19 @@
             return $http.get('/api/users/current').then(handleSuccess, handleError);
         }
 
-        function GetAll() {
-            return $http.get('/api/users/all').then(handleSuccess, handleError);
+        function GetAllUsers() {
+            return $http.get('/api/users/allusers').then(handleSuccess, handleError);
+        }
+
+        function GetAllClients() {
+            return $http.get('/api/users/allclients').then(handleSuccess, handleError);
         }
 
         function GetById(_id) {
             return $http.get('/api/users/' + _id).then(handleSuccess, handleError);
         }
 
-        function GetByUsername(username) {
+        function GetByClientname(username) {
             return $http.get('/api/users/' + username).then(handleSuccess, handleError);
         }
 

@@ -8,22 +8,25 @@ router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
 router.post('/add', addClient);
-router.post('/get', getClients);
+// router.post('/get', getClients);
+router.get('/:username', getByClientname);
+// router.post('/username', getByUsername);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
-router.get('/all', getUsers);
+router.get('/allusers', getUsers);
+router.get('/allclient', getClients);
 router.post('/foto', postFoto);
 
 const mongoClient = require("mongodb").MongoClient;
 
 async function getUsers(req, res) {
-    let users = []
+    let users = [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("users").find();
+        let cursor = await db.collection("client").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            users.push(doc.username);
+            users.push(doc);
         }
         console.log('uu',users);
         db.close();
@@ -162,7 +165,26 @@ async function getClients(req, res) {
         res.send(client);
     }
 }
-
+async function getByClientname(req,res){
+    var userName = req.user.sub;
+    let client= [];
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("client").find({userName});
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
+                client.push(doc);
+            } 
+        }
+        db.close();
+        console.log("vot tebe client")
+    } catch (error) {
+        console.error(error);
+        res.status(400).send(err);
+    } finally{
+        res.send(client);
+    }
+ }
 
 
 function deleteUser(req, res) {

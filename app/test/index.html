@@ -17,9 +17,9 @@
 
 <div class="userList">
   <div class="input-group userList_search">
-    <input type="text" class="form-control" placeholder="Search for..." />
+    <input type="text" class="form-control" ng-model="vm.name" placeholder="Search for..." />
     <span class="input-group-btn">
-      <button class="btn btn-default" type="button">Go!</button>
+      <button class="btn btn-default" ng-Click="vm.searchClients()" type="button">Go!</button>
     </span>
   </div>
   <!-- <input type="text" class="userList_search"> -->
@@ -34,8 +34,18 @@
       </div>
     </div>
   </div>
-  <div class="userList_form">
-    <div class="userList_item">
+  <!-- <div class="userList_form"> -->
+    <div class="userList_form">
+    <div class="userList_item" ng-repeat="user in vm.allUsers">
+      <img ng-src="{{user.idfoto1}}" alt="" class="user_foto" />
+      <div class="user_info">
+        <div class="col-lg-3 user_name">{{user.firstName}}</div>
+        <div class="col-lg-3 user_lastname">{{user.lastName}}</div>
+        <div class="col-lg-3 user_destination">{{user.destination}}</div>
+        <div class="col-lg-3 user_lastDate">{{user.destination}}</div>
+      </div>
+    </div>
+    <!-- <div class="userList_item">
       <img src="" alt="" class="user_foto" />
       <div class="user_info">
         <div class="col-lg-3 user_name">text</div>
@@ -43,15 +53,6 @@
         <div class="col-lg-3 user_destination">text</div>
         <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
       </div>
-    </div>
-    <div class="userList_item">
-      <img src="" alt="" class="user_foto" />
-      <div class="user_info">
-        <div class="col-lg-3 user_name">text</div>
-        <div class="col-lg-3 user_lastname">text</div>
-        <div class="col-lg-3 user_destination">text</div>
-        <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
-      </div>
-    </div>
+    </div> -->
   </div>
 </div>
