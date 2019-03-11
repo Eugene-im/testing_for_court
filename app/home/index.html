@@ -1,85 +1,40 @@
 ﻿<form method="post" id="add_new">
   <div class="form-group">
     <label for="lastName">Фамілія</label>
-    <input
-      type="text"
-      id="lastName"
-      class="form-control"
-      ng-model="vm.newUser.lastName"
-      required
-    />
+    <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.lastName" required />
   </div>
   <div class="form-group">
     <label for="firstName">Ім'я</label>
-    <input
-      type="text"
-      id="firstName"
-      class="form-control"
-      ng-model="vm.newUser.firstName"
-      required
-    />
+    <input type="text" id="firstName" class="form-control" ng-model="vm.newUser.firstName" required />
   </div>
   <div class="form-group">
     <label for="lastName">Побатькові</label>
-    <input
-      type="text"
-      id="lastName"
-      class="form-control"
-      ng-model="vm.newUser.surName"
-      required
-    />
+    <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.surName" required />
   </div>
   <div class="form-group">
     <label for="username">Мета візиту</label>
-    <input
-      type="text"
-      id="username"
-      class="form-control"
-      ng-model="vm.newUser.destination"
-      required
-    />
+    <input type="text" id="username" class="form-control" ng-model="vm.newUser.destination" required />
   </div>
 
   <div class="form-group upload">
     <label class="u1" for="userIdFoto">Фото особи</label>
-    <img class="u1" id="one" ng-src='{{vm.one}}' alt="" srcset="" />
-    <label for="fileone" class="btn btn-default input-group-addon"
-      >Обрати файл</label
-    >
+    <img class="u1" id="one" ng-src="{{ vm.one }}" alt="" srcset="" />
+    <label for="fileone" class="btn btn-default input-group-addon">Обрати файл</label>
 
     <input type="file" imgfor="one" onchange="angular.element(this).scope().fileNameChanged(this)" id="fileone" />
-    <input
-      id="fileName_one"
-      type="text"
-      class="form-control"
-      placeholder="Username"
-      aria-describedby="basic-addon1"
-    />
+    <input id="fileName_one" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" />
   </div>
 
   <div class="form-group upload">
     <label class="u2" for="userIdFoto">Фото документа що посвідчує особу</label>
-    <img class="u2" id="two" ng-src='{{vm.two}}' alt="" srcset="" />
-    <label for="filetwo" class="btn btn-default input-group-addon"
-      >Обрати файл</label
-    >
+    <img class="u2" id="two" ng-src="{{ vm.two }}" alt="" srcset="" />
+    <label for="filetwo" class="btn btn-default input-group-addon">Обрати файл</label>
     <input type="file" imgfor="two" namefore="" onchange="angular.element(this).scope().fileNameChanged(this)" id="filetwo" />
-    <input
-      id="fileName_two"
-      type="text"
-      class="form-control"
-      placeholder="Username"
-      aria-describedby="basic-addon1"
-    />
+    <input id="fileName_two" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" />
   </div>
 
   <div class="form-group">
-    <button
-      type="submit"
-      id="submitButton"
-      ng-click="vm.addNew()"
-      class="btn btn-success"
-    >
+    <button type="submit" id="submitButton" ng-click="vm.addNew()" class="btn btn-success">
       Зареєструвати
     </button>
   </div>
