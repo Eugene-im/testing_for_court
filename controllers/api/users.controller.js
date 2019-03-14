@@ -149,11 +149,11 @@ async function addClient(req, res) {
 async function getClients(req, res) {
 
     //console.log(req.body,res.body);
-    let data = req.body;    
+    // let data = req.body;    
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find();
+        let cursor = await db.collection("client").find({});
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
                 client.push(doc);
@@ -164,7 +164,8 @@ async function getClients(req, res) {
         console.error(error);
         res.status(400).send(err);
     } finally{
-        res.send(client);
+        if(client.length != 0) res.status(200).send(client);
+        else res.status(400).send("it's no client in client base");        
     }
 }
 async function getByClientname(req,res){
@@ -175,7 +176,7 @@ async function getByClientname(req,res){
         let cursor = await db.collection("client").find({firstName: data});
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName == data || doc.firstName == data || doc.surName == data){
-                // if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
+                // перебрать варианты имен фамилий и т.д.
                 client.push(doc);
             } 
         }
