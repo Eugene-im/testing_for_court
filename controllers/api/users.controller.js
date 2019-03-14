@@ -147,17 +147,13 @@ async function addClient(req, res) {
 }
 
 async function getClients(req, res) {
-
-    //console.log(req.body,res.body);
-    // let data = req.body;    
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("client").find({});
+        console.log(cursor);
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
                 client.push(doc);
-            } 
         }
         db.close();
     } catch (error) {
@@ -168,6 +164,7 @@ async function getClients(req, res) {
         else res.status(400).send("it's no client in client base");        
     }
 }
+
 async function getByClientname(req,res){
     var data = req.params.name;
     let client= [];
