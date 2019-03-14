@@ -37,7 +37,7 @@
         }
 
         function GetByClientname(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError);
+            return $http.get('/api/users/' + 'client/' + username).then(handleSuccess, handleError);
         }
 
         function Create(user) {

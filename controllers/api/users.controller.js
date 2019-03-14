@@ -9,13 +9,13 @@ router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
 router.post('/add', addClient);
 // router.post('/get', getClients);
-router.get('/:username', getByClientname);
+router.get('/client/:name', getByClientname);
 // router.post('/username', getByUsername);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
 router.get('/allusers', getUsers);
-router.get('/allclient', getClients);
+router.get('/allclients', getClients);
 router.post('/foto', postFoto);
 
 const mongoClient = require("mongodb").MongoClient;
@@ -113,7 +113,8 @@ function updateUser(req, res) {
 
 async function addClient(req, res) {
 
-    //console.log(req.body,res.body);
+    // console.log(req.body,res.body);
+    let data = req.body;
     let clientExist = false;
     try {
         const db = await mongoClient.connect(config.connectionString);
@@ -124,11 +125,11 @@ async function addClient(req, res) {
                 break;
             } 
         }
-        await mdb.collection("client").insert(data);
+        await db.collection("client").insert(data);
         db.close();
     } catch (error) {
         console.error(error);
-        res.status(400).send(err);
+        res.status(400).send(error);
     } finally{
         if (clientExist){
             res.status(400).send(`Client exist`);
@@ -148,6 +149,7 @@ async function addClient(req, res) {
 async function getClients(req, res) {
 
     //console.log(req.body,res.body);
+    let data = req.body;    
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
@@ -166,25 +168,26 @@ async function getClients(req, res) {
     }
 }
 async function getByClientname(req,res){
-    var userName = req.user.sub;
+    var data = req.params.name;
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find({userName});
+        let cursor = await db.collection("client").find({firstName: data});
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
+            if(doc.lastName == data || doc.firstName == data || doc.surName == data){
+                // if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
                 client.push(doc);
             } 
         }
         db.close();
-        console.log("vot tebe client")
     } catch (error) {
         console.error(error);
         res.status(400).send(err);
     } finally{
-        res.send(client);
+        if(client.length != 0) res.status(200).send(client);
+        else res.status(400).send("it's no client with " + data + " name");        
     }
- }
+}
 
 
 function deleteUser(req, res) {
