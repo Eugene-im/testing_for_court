@@ -1,8 +1,8 @@
 <div class="userList">
   <div class="input-group userList_search">
-    <input type="text" class="form-control" ng-model="vm.name" placeholder="Search for..." />
+    <input type="text" class="form-control" ng-change="vm.searchClients()" ng-model="vm.name" placeholder="Search for..." />
     <span class="input-group-btn">
-      <button class="btn btn-default" ng-Click="vm.searchClients()" type="button">Go!</button>
+      <button class="btn btn-default"  type="button">Go!</button>
     </span>
   </div>
   <div class="userList_title">
@@ -17,7 +17,7 @@
     </div>
   </div>
     <div class="userList_form">
-    <div class="userList_item" ng-repeat="client in vm.allClients">
+    <div class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
       <img ng-src="{{client.idfoto1}}" alt="" class="user_foto" />
       <div class="user_info">
         <div class="col-lg-3 user_name">{{client.firstName}}</div>
