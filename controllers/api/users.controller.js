@@ -10,7 +10,7 @@ router.get('/current', getCurrentUser);
 router.post('/add', addClient);
 // router.post('/get', getClients);
 router.get('/client/:name', getByClientname);
-// router.post('/username', getByUsername);
+router.post('/user/:name', getByUsername);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
@@ -151,7 +151,6 @@ async function getClients(req, res) {
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("client").find({});
-        console.log(cursor);
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
                 client.push(doc);
         }
@@ -187,6 +186,27 @@ async function getByClientname(req,res){
     }
 }
 
+async function getByUsername(req,res){
+    var data = req.params.name;
+    let client= [];
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("users").find({firstName: data});
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            if(doc.lastName == data || doc.firstName == data || doc.surName == data){
+                // перебрать варианты имен фамилий и т.д.
+                client.push(doc);
+            } 
+        }
+        db.close();
+    } catch (error) {
+        console.error(error);
+        res.status(400).send(err);
+    } finally{
+        if(client.length != 0) res.status(200).send(client);
+        else res.status(400).send("it's no user with " + data + " name");        
+    }
+}
 
 function deleteUser(req, res) {
     var userId = req.user.sub;

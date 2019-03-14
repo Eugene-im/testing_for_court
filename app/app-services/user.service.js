@@ -13,6 +13,7 @@
         service.GetAllUsers = GetAllUsers;
         service.GetById = GetById;
         service.GetByClientname = GetByClientname;
+        service.GetByUsername = GetByUsername;
         service.Create = Create;
         service.Update = Update;
         service.addNew = addNew;
@@ -38,6 +39,11 @@
 
         function GetByClientname(username) {
             return $http.get('/api/users/' + 'client/' + username).then(handleSuccess, handleError);
+        }
+
+
+        function GetByUsername(username) {
+            return $http.get('/api/users/' + 'user/' + username).then(handleSuccess, handleError);
         }
 
         function Create(user) {
