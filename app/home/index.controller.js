@@ -51,7 +51,7 @@
         function addNew() {
           vm.newUser.idfoto1 = vm.one;
           vm.newUser.idfoto2 = vm.two;
-          vm.newUser.date = new Date();
+          vm.newUser.date =  new Date(new Date().toUTCString()).toLocaleString()
             console.log(vm.newUser);
             UserService.addNew(vm.newUser).then(function() {
             FlashService.Success("відправлено");
