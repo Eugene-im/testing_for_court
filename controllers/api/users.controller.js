@@ -169,10 +169,9 @@ async function getByClientname(req,res){
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find({firstName: data});
+        let cursor = await db.collection("client").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName == data || doc.firstName == data || doc.surName == data){
-                // перебрать варианты имен фамилий и т.д.
                 client.push(doc);
             } 
         }
@@ -191,7 +190,7 @@ async function getByUsername(req,res){
     let client= [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("users").find({firstName: data});
+        let cursor = await db.collection("users").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName == data || doc.firstName == data || doc.surName == data){
                 // перебрать варианты имен фамилий и т.д.
