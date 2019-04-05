@@ -17,6 +17,12 @@
         vm.two = null;
         vm.qwe = null;
 
+        vm.mediaConfig = {
+          video: true
+        };
+        vm.video = null;
+        vm.errBack = null;
+
         $scope.$watch('two', function(){
             console.log('Two cahnged', arguments);
         });
@@ -29,34 +35,31 @@
                 vm.user = user;
             });
             // var context = canvas.getContext('2d');
-            var video = document.getElementById('video');
-            var mediaConfig = {
-              video: true
-            };
-            var errBack = function (e) {
+            vm.video = document.getElementById('video_one');
+            vm.errBack = function (e) {
               console.log('An error has occurred!', e)
             };
 
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-              navigator.mediaDevices.getUserMedia(mediaConfig).then(function (stream) {
-                video.srcObject = stream;
-                video.play();
+              navigator.mediaDevices.getUserMedia(vm.mediaConfig).then(function (stream) {
+                vm.video.srcObject = stream;
+                vm.video.play();
               });
             } else if (navigator.getUserMedia) { // Standard
-              navigator.getUserMedia(mediaConfig, function (stream) {
-                video.src = stream;
-                video.play();
-              }, errBack);
+              navigator.getUserMedia(vm.mediaConfig, function (stream) {
+                vm.video.src = stream;
+                vm.video.play();
+              }, vm.errBack);
             } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-              navigator.webkitGetUserMedia(mediaConfig, function (stream) {
-                video.src = window.webkitURL.createObjectURL(stream);
-                video.play();
-              }, errBack);
+              navigator.webkitGetUserMedia(vm.mediaConfig, function (stream) {
+                vm.video.src = window.webkitURL.createObjectURL(stream);
+                vm.video.play();
+              }, vm.errBack);
             } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-              navigator.mozGetUserMedia(mediaConfig, function (stream) {
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
-              }, errBack);
+              navigator.mozGetUserMedia(vm.mediaConfig, function (stream) {
+                vm.video.src = window.URL.createObjectURL(stream);
+                vm.video.play();
+              }, vm.errBack);
             }
         }
 
@@ -79,15 +82,12 @@
 
         }
 
-        function snap(){
-          var canvas = document.getElementById('canvas');
-          function convertCanvasToImage(canvas) {
-            vm.one = canvas.toDataURL("image/png");
-          }
-          document.getElementById('snap').addEventListener('click', function () {
-            // context.drawImage(video, 0, 0, 640, 480);
-            convertCanvasToImage(canvas);
-          });
+        function snap(a){
+          var canvas = document.getElementById('canvas_'+a);
+          var context = canvas.getContext('2d');
+          context.drawImage(vm.video, 0, 0, 640, 480);
+          vm[a] = canvas.toDataURL("image/png");
+          console.log(vm[a]);
         }
 
 

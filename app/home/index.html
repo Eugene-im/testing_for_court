@@ -18,29 +18,9 @@
 
   <div class="form-group upload">
     <label class="u1" for="userIdFoto">Фото особи</label>
-    <img class="u1" id="one" ng-src="{{ vm.one }}" alt="" srcset="" />
-    <!-- <img class="u1" id="id1" src="" alt=""> -->
-    <label for="fileone" class="btn btn-default input-group-addon">Обрати файл</label>
-
-    <input type="file" imgfor="one" onchange="angular.element(this).scope().fileNameChanged(this)" id="fileone" />
-    <input id="fileName_one" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" />
-  </div>
-
-  <video id="video" autoplay="" width="640" height="480"></video>
-  <button id="snap" ng-Click="vm.snap()" class="sexyButton">Snap Photo<div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </button>
-  <canvas id="canvas" width="640" height="480"></canvas>
-
-  <div class="form-group upload">
-    <label class="u2" for="userIdFoto">Фото документа що посвідчує особу</label>
-    <img class="u2" id="two" ng-src="{{ vm.two }}" alt="" srcset="" />
-    <label for="filetwo" class="btn btn-default input-group-addon">Обрати файл</label>
-    <input type="file" imgfor="two" namefore="" onchange="angular.element(this).scope().fileNameChanged(this)"
-      id="filetwo" />
-    <input id="fileName_two" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" />
+    <video id="video_one" autoplay="" width="640" height="480"></video>
+    <canvas id="canvas_one" width="640" height="480"></canvas>
+    <button ng-click="vm.snap('one')" class="btn btn-success">Snap Photo</button>
   </div>
 
   <div class="form-group">
@@ -49,48 +29,3 @@
     </button>
   </div>
 </form>
-
-<!-- <script>
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
-  var video = document.getElementById('video');
-  var mediaConfig = {
-    video: true
-  };
-  var errBack = function (e) {
-    console.log('An error has occurred!', e)
-  };
-
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia(mediaConfig).then(function (stream) {
-      video.srcObject = stream;
-      video.play();
-    });
-  } else if (navigator.getUserMedia) { // Standard
-    navigator.getUserMedia(mediaConfig, function (stream) {
-      video.src = stream;
-      video.play();
-    }, errBack);
-  } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-    navigator.webkitGetUserMedia(mediaConfig, function (stream) {
-      video.src = window.webkitURL.createObjectURL(stream);
-      video.play();
-    }, errBack);
-  } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
-    navigator.mozGetUserMedia(mediaConfig, function (stream) {
-      video.src = window.URL.createObjectURL(stream);
-      video.play();
-    }, errBack);
-  }
-
-  function convertCanvasToImage(canvas) {
-    var image1 = document.getElementById('id1');
-    console.log(image1);
-    image1.src = canvas.toDataURL("image/png");
-    console.log(image1);
-  }
-  document.getElementById('snap').addEventListener('click', function () {
-    // context.drawImage(video, 0, 0, 640, 480);
-    convertCanvasToImage(canvas);
-  });
-</script> -->
