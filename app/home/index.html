@@ -18,10 +18,21 @@
 
   <div class="form-group upload">
     <label class="u1" for="userIdFoto">Фото особи</label>
-    <video id="video_one" autoplay="" width="640" height="480"></video>
-    <canvas id="canvas_one" width="640" height="480"></canvas>
+    </br>
     <button ng-click="vm.snap('one')" class="btn btn-success">Snap Photo</button>
+    </br>
+    <video id="video_one" autoplay="" width="550" height="414"></video>
+    <canvas id="canvas_one" width="550" height="414"></canvas>
   </div>
+
+  <div class="form-group upload">
+      <label class="u1" for="userIdFoto">Фото документів</label>
+      </br>
+      <button ng-click="vm.snap('two')" class="btn btn-success">Snap Photo</button>
+      </br>
+      <video id="video_two" autoplay="" width="550" height="414"></video>
+      <canvas id="canvas_two" width="550" height="414"></canvas>
+    </div>
 
   <div class="form-group">
     <button type="submit" id="submitButton" ng-click="vm.addNew()" class="btn btn-success">
