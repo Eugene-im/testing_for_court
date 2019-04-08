@@ -1,12 +1,25 @@
 ﻿require('rootpath')();
-var express = require('express');
-var app = express();
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var expressJwt = require('express-jwt');
+const express = require('express');
+const app = express();
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const expressJwt = require('express-jwt');
 const mongoClient = require("mongodb").MongoClient;
-var config = require('config.json');
+const config = require('config.json');
 const obj_q = require ("./parser/file");
+const fs = require('fs');
+
+var https = require('https');
+var http = require('http');
+
+var options = {
+  key: fs.readFileSync('key/client-key.pem'),
+  cert: fs.readFileSync('key/client-cert.pem')
+};
+
+http.createServer(app).listen(8080);
+https.createServer(options, app).listen(4443);
+
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -25,7 +38,7 @@ app.use('/api', expressJwt({ secret: config.secret }).unless({ path: [
 
 // routes
 app.use('/login', require('./controllers/login.controller'));
-// app.use('/register', require('./controllers/register.controller'));
+app.use('/register', require('./controllers/register.controller'));
 app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/quest', require('./controllers/api/quest.controller'));
@@ -48,6 +61,8 @@ app.get('/', function (req, res) {
     return res.redirect('/app');
 });
 // start server
-var server = app.listen(process.env.PORT || 3000, function () {
-    console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
-});
+// var server = app.listen(process.env.PORT || 3000, "127.0.0.1", function () {
+//   console.log(server.address())
+//   console.log(server.address())
+//     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
+// });
