@@ -38,6 +38,44 @@ async function getUsers(req, res) {
 }
 
 
+async function getClients(req, res) {
+    let clients = [];
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("client").find();
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            clients.push(doc);
+        }
+        console.log('uu',clients);
+        db.close();
+    } catch (error) {
+        console.error(error);
+    }finally{
+        res.send(clients)
+    }
+}
+
+// async function getClients(req, res) {
+//     let client = [];
+//     try {
+//         const db = await mongoClient.connect(config.connectionString);
+//         let cursor = await db.collection("client").find({});
+//         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+//             client.push(doc);
+//         }
+//         db.close();
+//     } catch (error) {
+//         console.error(error);
+//         res.status(400).send(err);
+//     } finally{
+//         console.log("client");
+//         if(client.length != 0) res.status(200).send(client);
+//         else res.status(400).send("it's no client in client base");
+//     }
+// }
+
+
+
 
 async function postFoto(req, res) {
     try {
@@ -148,23 +186,6 @@ async function addClient(req, res) {
     // });
 }
 
-async function getClients(req, res) {
-    let client= [];
-    try {
-        const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find({});
-        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-                client.push(doc);
-        }
-        db.close();
-    } catch (error) {
-        console.error(error);
-        res.status(400).send(err);
-    } finally{
-        if(client.length != 0) res.status(200).send(client);
-        else res.status(400).send("it's no client in client base");        
-    }
-}
 
 async function getByClientname(req,res){
     var data = req.params.name;

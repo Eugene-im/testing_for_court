@@ -28,14 +28,14 @@
             .state('users', {
                 url: '/',
                 templateUrl: 'users/index.html',
-                controller: 'Users.IndexController',
+                controller: 'User.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'users' }
             })
             .state("clients", {
                 url: '/clients',
                 templateUrl: 'clients/index.html',
-                controller: 'Clients.IndexController',
+                controller: 'Client.IndexController',
                 controllerAs: 'vm',
                 data: {activeTab: 'clients'}
             });

@@ -1,31 +1,40 @@
 (function() {
     "use strict";
 
-    angular.module("app").controller("Test.IndexController", Controller);
+    angular.module("app").controller("Client.IndexController", Controller);
 
     function Controller(UserService, FlashService) {
         var vm = this;
 
         vm.user = null;
-        vm.allUsers = null;
+        vm.allClients = null;
         vm.name = null;
+
+
+        vm.searchClients = searchClients;
 
         initController();
 
         function initController() {
-            // getAllClients();
-            getAllUsers();
+            getAllClients();
         }
 
-        function getAllUsers(){
-            UserService.GetAllUsers().then(function(users) {
-                vm.allUsers = users;
-                console.log(vm.allUsers);
+
+        function getAllClients(){
+            UserService.GetAllClients().then(function(clients) {
+                vm.allClients = clients;
+                console.log(vm.allClients);
             });
         }
 
-        function searchUsers() {
-            //  TODO: Create a function for searching users.
+        function searchClients(){
+            var name = vm.name;
+            if (name === "") {getAllClients()}
+            else{
+                UserService.GetByClientname(name).then(function(clients){
+                    vm.allClients = clients;
+                })
+            }
         }
 
     }
