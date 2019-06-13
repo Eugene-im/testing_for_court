@@ -25,12 +25,19 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
             })
-            .state('test', {
+            .state('users', {
                 url: '/',
-                templateUrl: 'test/indexUser.html',
-                controller: 'Test.IndexController',
+                templateUrl: 'users/index.html',
+                controller: 'Users.IndexController',
                 controllerAs: 'vm',
-                data: { activeTab: 'test' }
+                data: { activeTab: 'users' }
+            })
+            .state("clients", {
+                url: '/clients',
+                templateUrl: 'clients/index.html',
+                controller: 'Clients.IndexController',
+                controllerAs: 'vm',
+                data: {activeTab: 'clients'}
             });
     }
 

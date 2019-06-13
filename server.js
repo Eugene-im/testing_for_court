@@ -35,7 +35,7 @@ app.use('/api/quest', require('./controllers/api/quest.controller'));
 //     mongoClient.connect(config.connectionString, function(err, client){
 //       let count=0;
 //       for (key in obj_q){
-//         client.db("test").collection("Quest").insert(obj_q[key]);
+//         client.db("users").collection("Quest").insert(obj_q[key]);
 //         count++;
 //       }
 //         res.send(count.toString());

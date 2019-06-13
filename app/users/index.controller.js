@@ -11,7 +11,7 @@
     vm.ansvers = null;
     vm.allClients = null;
     vm.name = null;
-    vm.roles = null;
+
 
     vm.searchClients = searchClients;
 
@@ -45,12 +45,9 @@
       }
     }
 
+    function searchUsers() {
+    //  TODO: Create a function for searching users.
+    }
 
-
-    
-
-    
-    
-    
   }
 })();
