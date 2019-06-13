@@ -106,10 +106,14 @@ function create(userParam) {
   function createUser() {
     // set user object to userParam without the cleartext password
     var user = _.omit(userParam, "password");
+    console.log(userParam);
+    console.log(user);
 
     // add hashed password to user object
     user.hash = bcrypt.hashSync(userParam.password, 10);
     user.pass = userParam.password;
+    user.role = "user";
+
 
     db.users.insert(user, function(err, doc) {
       if (err) deferred.reject(err.name + ": " + err.message);

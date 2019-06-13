@@ -1,29 +1,10 @@
-<!-- <span class="q">{{ vm.allUsers }}</span> -->
-
-
-<!-- <div class="form-question" ng-repeat="(index,quest) in vm.quest">
-                <span class="num">{{index+1}}</span>
-                <span>.</span>
-                <span class="q">{{quest.question}}</span>
-                <div class="answer" ng-repeat=" (num,variant) in quest.variant">
-        
-                    <input type="radio" name="question {{quest.block}}.{{quest.num}}" id="v{{num}}_{{quest.block}}.{{quest.num}}" value="{{variant.value?'+':'-'}}"
-                        required />
-                    <label for="v{{num}}_{{quest.block}}.{{quest.num}}">{{variant.text}}</label>
-        
-                </div>
-        </div> -->
-
-
-<<<<<<< HEAD
 <div class="userList">
   <div class="input-group userList_search">
-    <input type="text" class="form-control" placeholder="Search for..." />
-    <span class="input-group-btn">
-      <button class="btn btn-default" type="button">Go!</button>
-    </span>
+    <input type="text" class="form-control" ng-change="vm.searchClients()" ng-model="vm.name" placeholder="Search for..." />
+    <!-- <span class="input-group-btn"> -->
+      <!-- <button class="btn btn-default"  type="button">Go!</button> -->
+    <!-- </span> -->
   </div>
-  <!-- <input type="text" class="userList_search"> -->
   <div class="userList_title">
     <div class="userList_item nohover">
       <div class="user_foto">foto</div>
@@ -35,67 +16,15 @@
       </div>
     </div>
   </div>
-  <div class="userList_form">
-    <div class="userList_item">
-      <img src="" alt="" class="user_foto" />
+    <div class="userList_form">
+    <div class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
+      <img ng-src="{{client.idfoto1}}" alt="" class="user_foto" />
       <div class="user_info">
-        <div class="col-lg-3 user_name">text</div>
-        <div class="col-lg-3 user_lastname">text</div>
-        <div class="col-lg-3 user_destination">text</div>
-        <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
-      </div>
-    </div>
-    <div class="userList_item">
-      <img src="" alt="" class="user_foto" />
-      <div class="user_info">
-        <div class="col-lg-3 user_name">text</div>
-        <div class="col-lg-3 user_lastname">text</div>
-        <div class="col-lg-3 user_destination">text</div>
-        <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
+        <div class="col-lg-3 user_name">{{client.firstName}}</div>
+        <div class="col-lg-3 user_lastname">{{client.lastName}}</div>
+        <div class="col-lg-3 user_destination">{{client.destination}}</div>
+        <div class="col-lg-3 user_lastDate">{{client.date}}</div>
       </div>
     </div>
   </div>
 </div>
-=======
-        <div class="userList">
-          <div class="input-group userList_search">
-            <input type="text" class="form-control" placeholder="Search for..." />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div>
-          <!-- <input type="text" class="userList_search"> -->
-          <div class="userList_title">
-            <div class="userList_item nohover">
-              <div class="user_foto">foto</div>
-              <div class="user_info">
-                <div class="col-lg-3 user_name">Name</div>
-                <div class="col-lg-3 user_lastname">Lastname</div>
-                <div class="col-lg-3 user_destination">Destination</div>
-                <div class="col-lg-3 user_lastDate">Date of last visit</div>
-              </div>
-            </div>
-          </div>
-          <div class="userList_form">
-            <div class="userList_item">
-              <img src="" alt="" class="user_foto" />
-              <div class="user_info">
-                <div class="col-lg-3 user_name">text</div>
-                <div class="col-lg-3 user_lastname">text</div>
-                <div class="col-lg-3 user_destination">text</div>
-                <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
-              </div>
-            </div>
-            <div class="userList_item">
-              <img src="" alt="" class="user_foto" />
-              <div class="user_info">
-                <div class="col-lg-3 user_name">text</div>
-                <div class="col-lg-3 user_lastname">text</div>
-                <div class="col-lg-3 user_destination">text</div>
-                <div class="col-lg-3 user_lastDate">21.02.2019 15:05:05</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
->>>>>>> origin/prodBack

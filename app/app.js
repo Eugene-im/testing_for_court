@@ -27,7 +27,7 @@
             })
             .state('test', {
                 url: '/',
-                templateUrl: 'test/index.html',
+                templateUrl: 'test/indexUser.html',
                 controller: 'Test.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'test' }

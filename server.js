@@ -31,22 +31,23 @@ app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/quest', require('./controllers/api/quest.controller'));
 
 // write question module
-app.post("/write", function(req, res){
-    mongoClient.connect(config.connectionString, function(err, client){
-      let count=0;
-      for (key in obj_q){
-        client.db("test").collection("Quest").insert(obj_q[key]);
-        count++;
-      }
-        res.send(count.toString());                  
-        client.close();
-      });
-  });
+// app.post("/write", function(req, res){
+//     mongoClient.connect(config.connectionString, function(err, client){
+//       let count=0;
+//       for (key in obj_q){
+//         client.db("test").collection("Quest").insert(obj_q[key]);
+//         count++;
+//       }
+//         res.send(count.toString());
+//         client.close();
+//       });
+//   });
 
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
 });
+
 // start server
 var server = app.listen(process.env.PORT || 3000, function () {
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);

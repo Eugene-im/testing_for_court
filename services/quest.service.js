@@ -18,14 +18,14 @@ module.exports = service2;
 function getByNum(num) {
     var deferred = Q.defer();
     db.quest.find({num: num});
-    console.log(db.quest.find({num: num}))
+    console.log(db.quest.find({num: num}));
     return deferred.promise;
 }
 
 function getAll() {
     mongoClient.connect(config.database, function(err, client){
         client.db("test").collection("Quest").find({}).toArray(function(err, quest){
-            res.send(quest)
+            res.send(quest);
             client.close();
         });
     });

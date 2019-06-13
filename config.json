@@ -3,5 +3,10 @@
     "apiUrl": "http://localhost:3000/api",
     "secret": "74185694fdf:asdqwbjgjdghknfyhDFHGGHj",
     "questCount":46,
-    "mainQuestionBlockCount":4
+    "mainQuestionBlockCount":4,
+    "roles": {
+        "security": "Охрана",
+        "admin": "Администратор",
+        "root": "Суперюзер"
+    }
 }

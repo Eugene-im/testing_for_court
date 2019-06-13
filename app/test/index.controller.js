@@ -9,18 +9,43 @@
     vm.user = null;
     vm.allUsers = null;
     vm.ansvers = null;
+    vm.allClients = null;
+    vm.name = null;
+    vm.roles = null;
+
+    vm.searchClients = searchClients;
 
     initController();
 
     function initController() {
-      // get current user
-      UserService.GetCurrent().then(function(user) {
-        vm.user = user;
-      });
-      UserService.GetAll().then(function(users) {
-        vm.allUsers = users;
+      // getAllClients();
+      getAllUsers();
+    }
+
+
+    function getAllClients(){
+      UserService.GetAllClients().then(function(clients) {
+        vm.allClients = clients;
+        console.log(vm.allClients);
       });
     }
+    function getAllUsers(){
+      UserService.GetAllUsers().then(function(users) {
+        vm.allUsers = users;
+        console.log(vm.allUsers);
+      });
+    }
+    function searchClients(){
+      var name = vm.name;
+      if (name === "") {getAllClients()}
+      else{
+      UserService.GetByClientname(name).then(function(clients){
+        vm.allClients = clients;
+        })
+      }
+    }
+
+
 
     
 
