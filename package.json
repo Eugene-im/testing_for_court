@@ -10,24 +10,27 @@
         "start": "npm install && node server.js"
     },
     "dependencies": {
+        "angular-timer": "*",
         "bcryptjs": "^2.1.0",
         "body-parser": "^1.13.2",
         "ejs": "^2.3.3",
         "express": "^4.13.0",
         "express-jwt": "^3.0.1",
         "express-session": "^1.11.3",
+        "fs-extra": "^8.0.1",
+        "humanize-duration": "*",
         "jsonwebtoken": "^5.0.2",
         "lodash": "^4.10.0",
+        "moment": "*",
         "mongodb": "2.2.19",
         "mongodb-core": "1.2.26",
         "mongoose": "4.3.1",
         "mongoskin": "^2.1.0",
-        "moment": "*",
-        "angular-timer": "*",
-        "humanize-duration": "*",
+        "nodemon": "^1.19.1",
         "q": "^1.4.1",
         "request": "^2.58.0",
-        "rootpath": "^0.1.2"
+        "rootpath": "^0.1.2",
+        "uuid": "^3.3.2"
     },
     "license": "MIT"
 }

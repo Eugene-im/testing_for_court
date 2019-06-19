@@ -1,4 +1,6 @@
-﻿(function () {
+﻿// const fs = require("fs");
+
+(function () {
     'use strict';
 
     angular
@@ -7,6 +9,7 @@
         // .controller('Home.IndexController', Controller);
 
     function Controller(UserService, FlashService, $scope) {
+        // This scope
         var vm = this;
 
         vm.user = null;
@@ -83,25 +86,26 @@
         };
 
         function snap(a){
-          var canvas = document.getElementById('canvas_'+a);
-          var context = canvas.getContext('2d');
-          context.drawImage(vm.video, 0, 0, 640, 480);
-          vm[a] = canvas.toDataURL("image/png");
-          console.log(vm[a]);
+            // a - number of canvas.
+            var canvas = document.getElementById('canvas_' + a);
+            var context = canvas.getContext('2d');
+            context.drawImage(vm.video, 0, 0, 640, 480);
+            vm[a] = canvas.toDataURL("image/png");
+            console.log(vm[a]);
         }
 
 
         function addNew() {
-          vm.newUser.idfoto1 = vm.one;
-          vm.newUser.idfoto2 = vm.two;
-          vm.newUser.date =  new Date(new Date().toUTCString()).toLocaleString()
+            vm.newUser.idfoto1 = vm.one;
+            vm.newUser.idfoto2 = vm.two;
+            vm.newUser.date =  new Date(new Date().toUTCString()).toLocaleString();
             console.log(vm.newUser);
             UserService.addNew(vm.newUser).then(function() {
-            FlashService.Success("відправлено");
-          })
-          .catch(function(error) {
-            FlashService.Error(error);
-          });
+                FlashService.Success("відправлено");
+            })
+            .catch(function(error) {
+                FlashService.Error(error);
+            });
         }
     }
 })();

@@ -1,5 +1,7 @@
 ﻿var config = require('config.json');
 var express = require('express');
+const fs = require("fs");
+const uuidv4 = require("uuid/v4");
 var router = express.Router();
 var userService = require('services/user.service');
 
@@ -28,7 +30,7 @@ async function getUsers(req, res) {
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             users.push(doc);
         }
-        console.log('uu',users);
+        // console.log('uu',users);
         db.close();
     } catch (error) {
         console.error(error);
@@ -39,14 +41,18 @@ async function getUsers(req, res) {
 
 
 async function getClients(req, res) {
+    // Function to query all clients
     let clients = [];
+    let counter = 0; // Counter of documents which must be skipped.
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find();
+        let cursor = await db.collection("client").find(); // .skip(counter);
+
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             clients.push(doc);
+            ++counter;
         }
-        console.log('uu',clients);
+        // console.log('uu',clients);
         db.close();
     } catch (error) {
         console.error(error);
@@ -81,9 +87,9 @@ async function postFoto(req, res) {
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("users").insert({raw:"0x21332214235"});
-        // for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-        //     users.push(doc);
-        // }
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            users.push(doc);
+        }
         console.log('uu',cursor);
         db.close();
     } catch (error) {
@@ -152,19 +158,32 @@ function updateUser(req, res) {
 }
 
 async function addClient(req, res) {
-
-    // console.log(req.body,res.body);
     let data = req.body;
+    let dir = "./clients_photo";
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+
     let clientExist = false;
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("client").find();
+
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
                 clientExist = true;
                 break;
             } 
         }
+        var base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
+
+        data.idfoto1 = uuidv4() + ".png";
+
+        fs.writeFile("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
+            console.log("File created");
+        });
+        data.idfoto1 = "/clients_photo/" + data.idfoto1;
+
         await db.collection("client").insert(data);
         db.close();
     } catch (error) {
@@ -188,13 +207,16 @@ async function addClient(req, res) {
 
 
 async function getByClientname(req,res){
+
     var data = req.params.name;
+    console.log("[C] - Client request" + "\n" + req.params);
     let client= [];
+
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("client").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            if(doc.lastName == data || doc.firstName == data || doc.surName == data){
+            if(doc.lastName === data || doc.firstName === data || doc.surName === data){
                 client.push(doc);
             } 
         }
@@ -210,22 +232,24 @@ async function getByClientname(req,res){
 
 async function getByUsername(req,res){
     var data = req.params.name;
-    let client= [];
+    console.log("[U] - User request" + "\n" + req.params);
+    let users = [];
     try {
         const db = await mongoClient.connect(config.connectionString);
         let cursor = await db.collection("users").find();
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-            if(doc.lastName == data || doc.firstName == data || doc.surName == data){
+            if(doc.firstName === data || doc.lastName === data){
                 // перебрать варианты имен фамилий и т.д.
-                client.push(doc);
+                users.push(doc);
             } 
         }
+        console.log(users);
         db.close();
     } catch (error) {
         console.error(error);
         res.status(400).send(err);
     } finally{
-        if(client.length != 0) res.status(200).send(client);
+        if(users.length != 0) res.status(200).send(users);
         else res.status(400).send("it's no user with " + data + " name");        
     }
 }

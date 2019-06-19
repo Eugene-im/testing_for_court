@@ -26,11 +26,13 @@
     }
 
     function searchUsers() {
-      let name = vm.name;
+      var name = vm.name;
       if (name === "") {getAllUsers()}
       else{
+        console.log(name);
         UserService.GetByUsername(name).then(function(users){
           vm.allUsers = users;
+          alert("Here!");
         })
       }
     }

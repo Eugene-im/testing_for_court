@@ -37,8 +37,8 @@
             return $http.get('/api/users/' + _id).then(handleSuccess, handleError);
         }
 
-        function GetByClientname(username) {
-            return $http.get('/api/users/' + 'client/' + username).then(handleSuccess, handleError);
+        function GetByClientname(clientname) {
+            return $http.get('/api/users/' + 'client/' + clientname).then(handleSuccess, handleError);
         }
 
 
