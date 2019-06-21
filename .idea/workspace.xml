@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="847222be-0e64-433c-b0c9-e4f448a6a085" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/clients/index.controller.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/a7607d61-6058-4fc5-bcbe-5087ce944299.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/bed67686-90a0-4658-ad5a-a7062f265a29.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/c8de0c59-9cae-4749-ab60-af8bcb4b179d.png" beforeDir="false" />
@@ -42,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="39" />
+            <state relative-caret-position="166">
+              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -52,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/app/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="37" lean-forward="true" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -156,11 +155,6 @@
             <path>
               <item name="testing_for_court" type="b2602c69:ProjectViewProjectNode" />
               <item name="testing_for_court" type="462c0819:PsiDirectoryNode" />
-              <item name="clients_photo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testing_for_court" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testing_for_court" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -230,12 +224,12 @@
       <workItem from="1561028630764" duration="1192000" />
       <workItem from="1561097704978" duration="8029000" />
       <workItem from="1561107000583" duration="4303000" />
-      <workItem from="1561114025923" duration="1625000" />
+      <workItem from="1561114025923" duration="1914000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92837000" />
+    <option name="totallyTimeSpent" value="93126000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -248,7 +242,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1368" height="722" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23752792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -509,7 +502,7 @@
     <entry file="file://$PROJECT_DIR$/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="37" lean-forward="true" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -539,8 +532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="39" />
+        <state relative-caret-position="166">
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
         </state>
       </provider>
     </entry>
