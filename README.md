@@ -1,3 +1,9 @@
 # testing_for_court
-# npm install
-# npm start
+## To install all needed packeges type next command:
+```bash
+npm install
+```
+## To start project next command:
+```bash
+npm start
+```
