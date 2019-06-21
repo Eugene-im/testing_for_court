@@ -1,0 +1,25 @@
+1 File size checking.
+1.1 Make a photo compression.
+
+3 if client exist ? what edit/add 
+//4 what show in preview or show all on click//
+
+4.1. add green status for all clients as default
+4.2. function for create client
+4.3. who add changes to card
+
+4.4. add more photos in registration as variable switch
+
+5. show client only first <50? [fixed]
+6. onscroll add next <?50 [fixed]
+7. search in all clients onclick [fixed]
+
+
+8. remove registration for users !not for clients!
+9. Recommended: Check if clients photo correctly saved to Data base.
+10. Change amount of clients which must be load on button click.
+11. Add more than one camera on Client Registration page.
+
+
+
+000. Bag!!!!!!!!! After server restart we can add users!!!

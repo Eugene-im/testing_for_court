@@ -42,7 +42,14 @@
 
         function loadClients(offset) {
             UserService.Offset(offset).then(function(clients) {
-                vm.allClients = vm.allClients.concat(clients);
+                if (clients.length > 0){
+                    vm.allClients = vm.allClients.concat(clients);
+                }
+                else{
+                    let button = document.getElementById('btn');
+                    btn.setAttribute('disabled', 'true');
+                }
+
             });
 
         }

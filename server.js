@@ -1,11 +1,11 @@
 ﻿require('rootpath')();
 const express = require('express');
 const app = express();
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var expressJwt = require('express-jwt');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const expressJwt = require('express-jwt');
 const mongoClient = require("mongodb").MongoClient;
-var config = require('config.json');
+const config = require('config.json');
 const obj_q = require ("./parser/file");
 
 app.set('view engine', 'ejs');
@@ -44,12 +44,12 @@ app.use('/api/quest', require('./controllers/api/quest.controller'));
 //       });
 //   });
 
-// make '/app' default route
+// Make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
 });
 
-// start server
+// Start server
 var server = app.listen(process.env.PORT || 3000, function () {
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
 });

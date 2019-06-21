@@ -179,19 +179,12 @@ function updateUser(req, res) {
 
 async function addClient(req, res) {
     let data = req.body;
+
+    // Make dir which contains clients photo.
     let dir = "./clients_photo";
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
-
-    var base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
-
-    data.idfoto1 = uuidv4() + ".png";
-
-    fs.writeFile("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
-        console.log("File created");
-    });
-    data.idfoto1 = "/clients_photo/" + data.idfoto1;
 
     let clientExist = false;
     try {
@@ -205,6 +198,15 @@ async function addClient(req, res) {
             }
 
         }
+
+        // Convert base64string to local file.
+        let base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
+        data.idfoto1 = uuidv4() + ".png";
+        fs.writeFileSync("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
+            console.log("File created");
+        });
+
+        data.idfoto1 = "/clients_photo/" + data.idfoto1;
         await db.collection("client").insert(data);
         db.close();
     } catch (error) {
