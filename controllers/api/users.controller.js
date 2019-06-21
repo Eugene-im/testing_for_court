@@ -18,6 +18,7 @@ router.delete('/:_id', deleteUser);
 
 router.get('/allusers', getUsers);
 router.get('/allclients', getClients);
+router.get('/getOffset/:skip', GetClientsOffset);
 router.post('/foto', postFoto);
 
 const mongoClient = require("mongodb").MongoClient;
@@ -30,7 +31,7 @@ async function getUsers(req, res) {
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             users.push(doc);
         }
-        // console.log('uu',users);
+        console.log('[U] User',users);
         db.close();
     } catch (error) {
         console.error(error);
@@ -46,13 +47,32 @@ async function getClients(req, res) {
     let counter = 0; // Counter of documents which must be skipped.
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find(); // .skip(counter);
+        let cursor = await db.collection("client").find().limit(5);
 
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             clients.push(doc);
             ++counter;
         }
-        // console.log('uu',clients);
+        console.log('uu',clients);
+        db.close();
+    } catch (error) {
+        console.error(error);
+    }finally{
+        res.send(clients)
+    }
+}
+
+async function GetClientsOffset(req, res){
+    // Function to query all clients
+    let clients = [];
+    try {
+        const db = await mongoClient.connect(config.connectionString);
+        let cursor = await db.collection("client").find().limit(5).skip(parseInt(req.params.skip));
+
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            clients.push(doc);
+        }
+        console.log('uu',clients);
         db.close();
     } catch (error) {
         console.error(error);
@@ -164,6 +184,15 @@ async function addClient(req, res) {
         fs.mkdirSync(dir);
     }
 
+    var base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
+
+    data.idfoto1 = uuidv4() + ".png";
+
+    fs.writeFile("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
+        console.log("File created");
+    });
+    data.idfoto1 = "/clients_photo/" + data.idfoto1;
+
     let clientExist = false;
     try {
         const db = await mongoClient.connect(config.connectionString);
@@ -173,17 +202,9 @@ async function addClient(req, res) {
             if(doc.lastName == data.lastName && doc.firstName == data.firstName && doc.surName == data.surName){
                 clientExist = true;
                 break;
-            } 
+            }
+
         }
-        var base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
-
-        data.idfoto1 = uuidv4() + ".png";
-
-        fs.writeFile("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
-            console.log("File created");
-        });
-        data.idfoto1 = "/clients_photo/" + data.idfoto1;
-
         await db.collection("client").insert(data);
         db.close();
     } catch (error) {

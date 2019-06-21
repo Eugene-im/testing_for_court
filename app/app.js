@@ -2,8 +2,14 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ui.router', "ui.bootstrap"])
         .config(config)
+        .filter("startFrom", function () {
+            return function (data, start) {
+                return data.slice(start);
+            }
+
+        })
         .run(run);
 
     function config($stateProvider, $urlRouterProvider) {

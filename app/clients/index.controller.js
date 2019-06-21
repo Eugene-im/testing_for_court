@@ -9,6 +9,7 @@
         vm.user = null;
         vm.allClients = null;
         vm.name = null;
+        vm.offsetClients = null;
         vm.loadClients = loadClients;
 
         vm.searchClients = searchClients;
@@ -39,11 +40,11 @@
             }
         }
 
-        function loadClients() {
-            UserService.GetAllClients();
-            alert("Message!");
+        function loadClients(offset) {
+            UserService.Offset(offset).then(function(clients) {
+                vm.allClients = vm.allClients.concat(clients);
+            });
 
         }
-
     }
 })();

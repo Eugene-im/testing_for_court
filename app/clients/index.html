@@ -4,6 +4,7 @@
         <!-- <span class="input-group-btn"> -->
         <!-- <button class="btn btn-default"  type="button">Go!</button> -->
         <!-- </span> -->
+
     </div>
     <div class="userList_title">
         <div class="userList_item nohover">
@@ -17,15 +18,15 @@
         </div>
     </div>
     <div class="userList_form">
-        <div class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
-            <img ng-src="{{client.idfoto1}}" alt="" class="user_foto" />
-            <div class="user_info">
-                <div class="col-lg-3 user_name">{{client.firstName}}</div>
-                <div class="col-lg-3 user_lastname">{{client.lastName}}</div>
-                <div class="col-lg-3 user_destination">{{client.destination}}</div>
-                <div class="col-lg-3 user_lastDate">{{client.date}}</div>
-            </div>
-        </div>
-        <button ng-click="vm.loadClients()">Load more...</button>
+        <table id="clientTable" style="width: 100%">
+            <tr class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
+                <td><img ng-src="{{client.idfoto1}}" alt="" class="user_foto" /></td>
+                <td class="col-lg-3 user_name">{{client.firstName}}</td>
+                <td class="col-lg-3 user_lastname">{{client.lastName}}</td>
+                <td class="col-lg-3 user_destination">{{client.destination}}</td>
+                <td class="col-lg-3 user_lastDate">{{client.date}}</td>
+            </tr>
+        </table>
+        <button ng-click="vm.loadClients(vm.allClients.length)">Завантажити ще...</button>
     </div>
 </div>

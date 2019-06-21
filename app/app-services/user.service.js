@@ -18,6 +18,7 @@
         service.Update = Update;
         service.addNew = addNew;
         service.Delete = Delete;
+        service.Offset = getClientOffset;
 
         return service;
 
@@ -31,6 +32,10 @@
 
         function GetAllClients() {
             return $http.get('/api/users/allclients').then(handleSuccess, handleError);
+        }
+
+        function getClientOffset(offset){
+            return $http.get("/api/users/getOffset/" + offset).then(handleSuccess, handleError);
         }
 
         function GetById(_id) {

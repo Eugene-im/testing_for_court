@@ -1,6 +1,6 @@
 ﻿require('rootpath')();
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use("/clients_photo", express.static(__dirname + "/clients_photo"));
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
