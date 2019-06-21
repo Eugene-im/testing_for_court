@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="847222be-0e64-433c-b0c9-e4f448a6a085" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/clients/index.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/clients/index.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/clients/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/clients/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui-bootstrap-tpls-2.5.0.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bags-list" beforeDir="false" afterPath="$PROJECT_DIR$/bag-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/clients/index.controller.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/a7607d61-6058-4fc5-bcbe-5087ce944299.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/bed67686-90a0-4658-ad5a-a7062f265a29.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/clients_photo/c8de0c59-9cae-4749-ab60-af8bcb4b179d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/api/users.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/api/users.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,20 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
               <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/clients/index.controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="49" column="57" selection-start-line="49" selection-start-column="57" selection-end-line="49" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -173,6 +156,11 @@
             <path>
               <item name="testing_for_court" type="b2602c69:ProjectViewProjectNode" />
               <item name="testing_for_court" type="462c0819:PsiDirectoryNode" />
+              <item name="clients_photo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testing_for_court" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testing_for_court" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -242,12 +230,12 @@
       <workItem from="1561028630764" duration="1192000" />
       <workItem from="1561097704978" duration="8029000" />
       <workItem from="1561107000583" duration="4303000" />
-      <workItem from="1561114025923" duration="1033000" />
+      <workItem from="1561114025923" duration="1625000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92245000" />
+    <option name="totallyTimeSpent" value="92837000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -525,13 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/clients/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
@@ -553,6 +534,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="49" column="57" selection-start-line="49" selection-start-column="57" selection-end-line="49" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="39" />
         </state>
       </provider>
     </entry>
