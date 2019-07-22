@@ -19,7 +19,13 @@
             <li class="btn-danger"><a href="/login" target="_self">Вийти</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
-            <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+            <div class="{{'alert alert-' + flash.type}}">
+                   <div>
+                        {{flash.message}}
+                   </div>
+                <button ng-if="flash.buttonSuccess" class="{{'btn btn-' + flash.buttonSuccess.if}}" ng-bind="flash.buttonSuccess.messageSuccess" ng-click="flash.buttonSuccess.action()"></button>
+                <button ng-if="flash.buttonDecline" class="{{'btn btn-' + flash.buttonDecline.if}}" ng-bind="flash.buttonDecline.messageDecline" ng-click="flash.buttonDecline.action()"></button>
+            </div>
         </div>
     </header>
 

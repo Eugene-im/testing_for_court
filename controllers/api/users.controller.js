@@ -4,6 +4,7 @@ const fs = require("fs");
 const uuidv4 = require("uuid/v4");
 var router = express.Router();
 var userService = require('services/user.service');
+const lim = config.lim;
 
 // routes
 router.post('/authenticate', authenticateUser);
@@ -37,7 +38,7 @@ async function getUsers(req, res) {
         console.error(error);
     }finally{
         res.send(users)
-    }   
+    }
 }
 
 
@@ -47,7 +48,7 @@ async function getClients(req, res) {
     let counter = 0; // Counter of documents which must be skipped.
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find().limit(5);
+        let cursor = await db.collection("client").find().limit(lim);
 
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             clients.push(doc);
@@ -67,7 +68,7 @@ async function GetClientsOffset(req, res){
     let clients = [];
     try {
         const db = await mongoClient.connect(config.connectionString);
-        let cursor = await db.collection("client").find().limit(5).skip(parseInt(req.params.skip));
+        let cursor = await db.collection("client").find().limit(lim).skip(parseInt(req.params.skip));
 
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             clients.push(doc);
@@ -116,7 +117,7 @@ async function postFoto(req, res) {
         console.error(error);
     }finally{
         res.send('ok')
-    }   
+    }
 }
 
 module.exports = router;
@@ -181,9 +182,12 @@ async function addClient(req, res) {
     let data = req.body;
 
     // Make dir which contains clients photo.
-    let dir = "./clients_photo";
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
+    let clients_photo_path = "./clients_photo";
+    let clients_documentPhoto_path = "./clients_document_photo";
+
+    if (!fs.existsSync(clients_photo_path) || !fs.existsSync(clients_documentPhoto_path)){
+        fs.mkdirSync(clients_photo_path);
+        fs.mkdirSync(clients_documentPhoto_path);
     }
 
     let clientExist = false;
@@ -198,15 +202,29 @@ async function addClient(req, res) {
             }
 
         }
-
+        let pattern = /^data:image\/png;base64,/;
         // Convert base64string to local file.
-        let base64Image = await data.idfoto1.replace(/^data:image\/png;base64,/, "");
+        let client_photo_code = await data.idfoto1.replace(pattern, "");
+        let client_documentPhoto_code = await data.idfoto2.replace(pattern, "");
         data.idfoto1 = uuidv4() + ".png";
-        fs.writeFileSync("clients_photo/" + data.idfoto1, base64Image, {encoding: 'base64'}, function (err) {
+        data.idfoto2 = uuidv4() + ".png";
+
+        fs.writeFileSync("clients_photo/" + data.idfoto1, client_photo_code,
+            {encoding: 'base64'},
+            (err) => {
+            if (err) console.log(err);
+            console.log("File created");
+        });
+
+        fs.writeFileSync("clients_document_photo/" + data.idfoto2, client_documentPhoto_code,
+            {encoding: 'base64'},
+            (err) => {
+            if (err) console.log("Error");
             console.log("File created");
         });
 
         data.idfoto1 = "/clients_photo/" + data.idfoto1;
+        data.idfoto2 = "/clients_document_photo/" + data.idfoto2;
         await db.collection("client").insert(data);
         db.close();
     } catch (error) {
@@ -241,7 +259,7 @@ async function getByClientname(req,res){
         for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
             if(doc.lastName === data || doc.firstName === data || doc.surName === data){
                 client.push(doc);
-            } 
+            }
         }
         db.close();
     } catch (error) {
@@ -249,7 +267,7 @@ async function getByClientname(req,res){
         res.status(400).send(err);
     } finally{
         if(client.length != 0) res.status(200).send(client);
-        else res.status(400).send("it's no client with " + data + " name");        
+        else res.status(400).send("it's no client with " + data + " name");
     }
 }
 
@@ -264,7 +282,7 @@ async function getByUsername(req,res){
             if(doc.firstName === data || doc.lastName === data){
                 // перебрать варианты имен фамилий и т.д.
                 users.push(doc);
-            } 
+            }
         }
         console.log(users);
         db.close();
@@ -273,7 +291,7 @@ async function getByUsername(req,res){
         res.status(400).send(err);
     } finally{
         if(users.length != 0) res.status(200).send(users);
-        else res.status(400).send("it's no user with " + data + " name");        
+        else res.status(400).send("it's no user with " + data + " name");
     }
 }
 

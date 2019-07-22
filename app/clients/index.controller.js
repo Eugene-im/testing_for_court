@@ -35,7 +35,7 @@
             else{
                 UserService.GetByClientname(name).then(function(clients){
                     vm.allClients = clients;
-                    alert("Here!");
+                    // alert("Here!");
                 })
             }
         }
@@ -46,7 +46,7 @@
                     vm.allClients = vm.allClients.concat(clients);
                 }
                 else{
-                    let button = document.getElementById('btn');
+                    // let button = document.getElementById('btn');
                     btn.setAttribute('disabled', 'true');
                 }
 

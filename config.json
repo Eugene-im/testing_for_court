@@ -1,9 +1,10 @@
 ﻿{
     "connectionString": "mongodb://localhost:27017/test",
-    "apiUrl": "http://localhost:3000/api",
+    "apiUrl": "http://localhost:8080/api",
     "secret": "74185694fdf:asdqwbjgjdghknfyhDFHGGHj",
     "questCount":46,
     "mainQuestionBlockCount":4,
+    "lim":10,
     "roles": {
         "security": "Охрана",
         "admin": "Администратор",

@@ -155,7 +155,7 @@ form {
 
 .user_info,
 .userList_item {
-  display: flex;
+  /*display: flex;*/
   align-items: center;
 }
 
@@ -203,3 +203,11 @@ form {
   background: none;
   height: auto;
 }
+
+/*#clientTable tr, th{*/
+/*  border: 2px silver solid;*/
+/*}*/
+
+
+
+
