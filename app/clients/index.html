@@ -4,30 +4,33 @@
         <!-- <span class="input-group-btn"> -->
         <!-- <button class="btn btn-default"  type="button">Go!</button> -->
         <!-- </span> -->
-
-    </div>
-    <div class="userList_title">
-        <div class="userList_item nohover">
-            <div class="user_foto">Фото</div>
-            <div class="user_info">
-                <div class="col-lg-3 user_name">Ім'я</div>
-                <div class="col-lg-3 user_lastname">По-батькові</div>
-                <div class="col-lg-3 user_destination">Призначення</div>
-                <div class="col-lg-3 user_lastDate">Останній візит</div>
-            </div>
-        </div>
     </div>
     <div class="userList_form">
-        <table id="clientTable" style="width: 100%">
-            <tr class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
-                <td><img ng-src="{{client.idfoto1}}" alt="" class="user_foto" /></td>
-                <td class="col-lg-3 user_name">{{client.firstName}}</td>
-                <td class="col-lg-3 user_lastname">{{client.lastName}}</td>
-                <td class="col-lg-3 user_destination">{{client.destination}}</td>
-                <td class="col-lg-3 user_lastDate">{{client.date}}</td>
-            </tr>
+        <table id="clientTable" class="table">
+            <thead>
+                <tr class="userList_item nohover bg-dark">
+                    <th class="col-lg-3">Фото</th>
+                    <th class="col-lg-3">Документ</th>
+                    <th class="col-lg-3 user_name">Ім'я</th>
+                    <th class="col-lg-3 user_lastname">Прізвище</th>
+                    <th class="col-lg-3 user_destination">Призначення</th>
+                    <th class="col-lg-3 user_lastDate">Візит</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="userList_item" ng-click="" ng-repeat="client in vm.allClients">
+                    <td><img ng-src="{{client.idfoto1}}" alt="" class="user_foto" /></td>
+                    <td><img ng-src="{{client.idfoto2}}" alt="" class="user_foto" /></td>
+                    <td class="col-lg-3 user_name">{{client.firstName}}</td>
+                    <td class="col-lg-3 user_lastname">{{client.lastName}}</td>
+                    <td class="col-lg-3 user_destination">{{client.destination}}</td>
+                    <td class="col-lg-3 user_lastDate">{{client.date}}</td>
+                </tr>
+            </tbody>
         </table>
-        <button id="btn" ng-click="vm.loadClients(vm.allClients.length)">Завантажити ще...</button>
-
+        <!-- TODO: Придумать, как подтянуть из конфига лимит -->
+        <button id="btn"
+                ng-if="vm.allClients.length > 10"
+                ng-click="vm.loadClients(vm.allClients.length)">Завантажити ще...</button>
     </div>
 </div>

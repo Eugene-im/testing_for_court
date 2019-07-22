@@ -1,31 +1,51 @@
 ﻿<form method="post" id="add_new">
-  <div class="form-group">
-    <label for="lastName">Прізвище</label>
-    <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.lastName" required />
-  </div>
-  <div class="form-group">
-    <label for="firstName">Ім'я</label>
-    <input type="text" id="firstName" class="form-control" ng-model="vm.newUser.firstName" required />
-  </div>
-  <div class="form-group">
-    <label for="lastName">Побатькові</label>
-    <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.surName" required />
-  </div>
-  <div class="form-group">
-    <label for="username">Мета візиту</label>
-    <input type="text" id="username" class="form-control" ng-model="vm.newUser.destination" required />
-  </div>
+  <div class="slick" style="height: 80vh; width: 100%; max-width: 600px">
+    <div class="slide" ng-show="vm.slide < 1">
+      <label class="u1">1. Данні особи</label>
+      <div class="form-group">
+        <label for="lastName">Прізвище</label>
+        <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.lastName" required />
+      </div>
+      <div class="form-group">
+        <label for="firstName">Ім'я</label>
+        <input type="text" id="firstName" class="form-control" ng-model="vm.newUser.firstName" required />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Побатькові</label>
+        <input type="text" id="lastName" class="form-control" ng-model="vm.newUser.surName" required />
+      </div>
+      <div class="form-group">
+        <label for="username">Мета візиту</label>
+        <input type="text" id="username" class="form-control" ng-model="vm.newUser.destination" required />
+      </div>
+    </div>
+    <div class="slide" ng-show="vm.slide == 1">
+      <div class="form-group upload">
+        <label class="u1" for="userIdFoto">2. Фото особи</label>
+        <video id="video_1" autoplay="" width="640" height="480"></video>
+        <canvas id="canvas_1" width="640" height="480"></canvas>
+        <button ng-click="vm.snap('1')" class="btn btn-success">Snap Photo</button>
+        <div id="cl1" style="font-size:18px"></div>
+      </div>
+    </div>
+    <div class="slide" ng-show="vm.slide == 2">
+      <div class="form-group upload">
+        <label class="u1" for="userIdFoto">3. Фото документів</label>
+        <video id="video_2" autoplay="" width="640" height="480"></video>
+        <canvas id="canvas_2" width="640" height="480"></canvas>
+        <button ng-click="vm.snap('2')" class="btn btn-success">Snap Photo</button>
+      </div>
+    </div>
 
-  <div class="form-group upload">
-    <label class="u1" for="userIdFoto">Фото особи</label>
-    <video id="video_one" autoplay="" width="640" height="480"></video>
-    <canvas id="canvas_one" width="640" height="480"></canvas>
-    <button ng-click="vm.snap('one')" class="btn btn-success">Snap Photo</button>
-  </div>
-
-  <div class="form-group">
-    <button type="submit" id="submitButton" ng-click="vm.addNew()" class="btn btn-success">
-      Зареєструвати
-    </button>
+    <div class="form-group">
+      <button type="button" id="nextButton" ng-click="vm.nextStep()" ng-if="vm.slide < 2 && vm.flag1 == null"
+        class="btn btn-success">Далі</button>
+    </div>
+    <div class="form-group">
+      <button type="no" id="declineButton" ng-click="vm.reset()" ng-if="vm.flag == 1"
+        class="btn btn-danger">Корегувати</button>
+      <button type="submit" id="submitButton" ng-click="vm.addNew()" ng-if="vm.flag == 1"
+        class="btn btn-success">Зареєструвати</button>
+    </div>
   </div>
 </form>
